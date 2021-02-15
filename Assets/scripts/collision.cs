@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class collision : MonoBehaviour
 {
-    public player play;
+    public player2D play;
    void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "block")
