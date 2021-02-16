@@ -6,6 +6,7 @@ public class player2D : MonoBehaviour
 {
     public float speed = 3.0f;
     public float jump = 20.0f;
+    public float energy = 0f;
     public LayerMask JumpLayer;
     public Rigidbody2D playerRigidbody;
     public Collider2D playerCollider;
@@ -13,12 +14,15 @@ public class player2D : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+     
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(energy <=0){       
+            return;
+        }
         transform.localRotation = Quaternion.Euler(0, 0, 0);
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
