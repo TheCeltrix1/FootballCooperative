@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/blah.unity
     guid: 5f44a266473791e479e9bba50c065198
+      - enabled: 1
+    path: Assets/Scenes/MarcusScene.unity
+    guid: 02a3c04ffcc00da4f832784d0b70c8db
   m_configObjects: {}
