@@ -9,10 +9,21 @@ public class GameManager : MonoBehaviour
     public float delay = 2f;
     public GameObject completelvlUI;
     public GameObject tryagain;
+    public float maxenergy;
 
   public void endlevel()
     {
         completelvlUI.SetActive(true);
+    }
+
+    private void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("manager");
+        if(objs.Length > 1)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void death()
@@ -26,8 +37,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void gohome()
+    {
+        Invoke("mainmenu", delay);
+        maxenergy += 10;
+    }
+
     void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    void mainmenu()
+    {
+        SceneManager.LoadScene("blah");
     }
 }

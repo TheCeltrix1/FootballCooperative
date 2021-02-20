@@ -20,7 +20,8 @@ public class player2D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(energy <=0){       
+        if(energy <=0){
+            FindObjectOfType<GameManager>().gohome();
             return;
         }
         energy -= Time.deltaTime;

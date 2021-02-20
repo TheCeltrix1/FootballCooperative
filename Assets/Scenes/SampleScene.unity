@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 339643002}
   - component: {fileID: 339643001}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: gamemanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,6 +314,7 @@ MonoBehaviour:
   delay: 2
   completelvlUI: {fileID: 0}
   tryagain: {fileID: 0}
+  maxenergy: 0
 --- !u!4 &339643002
 Transform:
   m_ObjectHideFlags: 0
