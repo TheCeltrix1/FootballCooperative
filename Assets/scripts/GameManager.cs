@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject completelvlUI;
     public GameObject tryagain;
     public float maxenergy;
+    public float maxhealth;
 
   public void endlevel()
     {
@@ -40,7 +41,8 @@ public class GameManager : MonoBehaviour
     public void gohome()
     {
         Invoke("mainmenu", delay);
-        maxenergy += 10;
+    
+            
     }
 
     void restart()
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
     }
     void mainmenu()
     {
+        maxenergy += 2;
+        maxhealth += 1;
         SceneManager.LoadScene("blah");
     }
 }

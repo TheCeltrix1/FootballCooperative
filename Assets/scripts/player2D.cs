@@ -11,10 +11,13 @@ public class player2D : MonoBehaviour
     public Rigidbody2D playerRigidbody;
     public Collider2D playerCollider;
     public player2D play;
+  //  public GameManager topenergy;
     // Start is called before the first frame update
     void Start()
     {
-     
+        energy = FindObjectOfType<GameManager>().maxenergy;
+        
+
     }
 
     // Update is called once per frame

@@ -33,7 +33,7 @@ public class Test : MonoBehaviour
     {
         Debug.Log("Getting Health");
         currentHealth += health;
-        playerStats.SetHealth(currentHealth);
+      //  playerStats.SetHealth(currentHealth);
     }
     void AddStamina(int stamina)
     {
