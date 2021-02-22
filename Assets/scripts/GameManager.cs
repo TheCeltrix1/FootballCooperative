@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject tryagain;
     public float maxenergy;
     public float maxhealth;
+  
 
   public void endlevel()
     {
@@ -19,11 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("manager");
-        if(objs.Length > 1)
-        {
-            Destroy(this.gameObject);
-        }
+     
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -40,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     public void gohome()
     {
-        Invoke("mainmenu", delay);
+        Invoke("mainmenu", 0.1f);
     
             
     }
@@ -48,11 +45,14 @@ public class GameManager : MonoBehaviour
     void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CancelInvoke("restart");
     }
     void mainmenu()
     {
+        Debug.Log("loading");
         maxenergy += 2;
         maxhealth += 1;
         SceneManager.LoadScene("blah");
+        CancelInvoke("mainmenu");
     }
 }

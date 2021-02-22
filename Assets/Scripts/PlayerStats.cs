@@ -13,6 +13,8 @@ public class PlayerStats : MonoBehaviour
     // public Image stamFill;
      void Start()
     {
+        manager = FindObjectOfType<GameManager>();
+        staminaSlider.value = FindObjectOfType<GameManager>().maxenergy;
         SetHealth(); 
     }
     public void SetMaxHealth(int health)
@@ -35,12 +37,12 @@ public class PlayerStats : MonoBehaviour
     public void SetStamina(int stamina)
     {
         staminaSlider.value = stamina;
-        staminaSlider.value = FindObjectOfType<player2D>().energy;
+      //  staminaSlider.value = FindObjectOfType<player2D>().energy;
 
     }
      void Update()
     {
-       // healthSlider.value = FindObjectOfType<GameManager>().maxhealth;
+        healthSlider.value = FindObjectOfType<GameManager>().maxhealth;
         staminaSlider.value = FindObjectOfType<player2D>().energy;
     }
  

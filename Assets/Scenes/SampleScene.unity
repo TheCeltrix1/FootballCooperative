@@ -316,6 +316,7 @@ MonoBehaviour:
   tryagain: {fileID: 0}
   maxenergy: 5
   maxhealth: 2
+  functioncalled: 0
 --- !u!4 &339643002
 Transform:
   m_ObjectHideFlags: 0
@@ -556,7 +557,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 6
+  m_MaxValue: 10
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
@@ -931,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5868517ed534ea4585bd88215d20092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
+  healthSlider: {fileID: 400957395}
   manager: {fileID: 339643001}
   staminaSlider: {fileID: 1117052297}
 --- !u!114 &1117052297
