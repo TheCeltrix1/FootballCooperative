@@ -11,20 +11,28 @@ public class player2D : MonoBehaviour
     public Rigidbody2D playerRigidbody;
     public Collider2D playerCollider;
     public player2D play;
+    private float stamina;
   //  public GameManager topenergy;
     // Start is called before the first frame update
     void Start()
     {
         energy = FindObjectOfType<GameManager>().maxenergy;
-        
+      stamina =  FindObjectOfType<GameManager>().maxenergy;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(energy <=0){
+        if(energy <=0 && stamina < 10 ){
             FindObjectOfType<GameManager>().gohome();
+            Debug.Log("goinghome");
+            return;
+        }
+        if (energy <= 0 && stamina >= 10)
+        {
+            // FindObjectOfType<GameManager>().gohome();
+            Debug.Log("endgame");
             return;
         }
         energy -= Time.deltaTime;

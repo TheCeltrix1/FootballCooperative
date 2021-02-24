@@ -41,7 +41,10 @@ public class GameManager : MonoBehaviour
     
             
     }
-
+    public void endgame()
+    {
+        completelvlUI.SetActive(true);
+    }
     void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
