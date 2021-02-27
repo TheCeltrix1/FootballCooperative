@@ -9,6 +9,7 @@ namespace HomeCode
     {
         public AudioClip[] audioClips;
         public GameObject buttonHolder;
+        public float energyIncrease = 5;
         public float timerLength;
         private float _timer;
         private bool _moveButtonHolder;
@@ -17,7 +18,6 @@ namespace HomeCode
         private Vector2 _originalPos;
         private AudioSource _audioSource;
 
-        // Start is called before the first frame update
         void Awake()
         {
             if (GetComponent<AudioSource>() == false) gameObject.AddComponent<AudioSource>();
@@ -26,9 +26,9 @@ namespace HomeCode
             _audioSource.volume = 0.25f;
             _altPos = new Vector2(buttonHolder.transform.position.x, -buttonHolder.GetComponentInParent<Canvas>().GetComponent<RectTransform>().rect.height);
             _originalPos = buttonHolder.transform.position;
+            buttonHolder.transform.position = _altPos;
         }
 
-        // Update is called once per frame
         void Update()
         {
             if (Input.GetKeyDown("k")) ResetActivities();
@@ -50,6 +50,7 @@ namespace HomeCode
 
         public void Click(int i)
         {
+            GameManager.maxenergy += energyIncrease;
             ChooseActivity(i, buttonHolder);
         }
 

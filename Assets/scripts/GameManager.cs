@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public float delay = 2f;
     public GameObject completelvlUI;
     public GameObject tryagain;
-    public float maxenergy;
+    public static float maxenergy;
 
   public void endlevel()
     {

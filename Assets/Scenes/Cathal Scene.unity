@@ -152,8 +152,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: abeffe3dedc53ff40824c43b81d601de, type: 3}
+  - {fileID: 8300000, guid: b5cebcca2797be44aa71f97eec7dbede, type: 3}
+  - {fileID: 8300000, guid: 7196ea89eacee7c48a36970ed32cce81, type: 3}
+  - {fileID: 8300000, guid: 763e2ccb6a1a93341be3193a3dcdf08e, type: 3}
+  - {fileID: 8300000, guid: ddba8d4760ac3314293298c7b4c25d7a, type: 3}
+  - {fileID: 8300000, guid: ed0306da28c32494189febf8fc109d41, type: 3}
   buttonHolder: {fileID: 1197435057}
+  energyIncrease: 10
   timerLength: 2
 --- !u!114 &210454767
 MonoBehaviour:
@@ -461,6 +466,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985745755993797281, guid: 1906355bc59d21248bb2f41762feea4f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 210454766}
+    - target: {fileID: 2985745755993797281, guid: 1906355bc59d21248bb2f41762feea4f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Click
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985745755993797281, guid: 1906355bc59d21248bb2f41762feea4f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985745755993797281, guid: 1906355bc59d21248bb2f41762feea4f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985745755993797281, guid: 1906355bc59d21248bb2f41762feea4f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1906355bc59d21248bb2f41762feea4f, type: 3}
