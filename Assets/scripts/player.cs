@@ -6,14 +6,14 @@ public class player : MonoBehaviour
 {
     public Rigidbody box;
     public SphereCollider col;
-   public LayerMask groundlayer;
+    public LayerMask groundlayer;
     public float forwardspeed = 2000f;
     public float sideways = 500f;
     public float jump = 500f;
     AudioSource audi;
 
 
- void Start()
+    void Start()
     {
         col = GetComponent<SphereCollider>();
         audi = GetComponent<AudioSource>();
@@ -24,7 +24,8 @@ public class player : MonoBehaviour
     {
         box.AddForce(0, 0, forwardspeed * Time.deltaTime);
 
-        if (Input.GetKey("d")){
+        if (Input.GetKey("d"))
+        {
             box.AddForce(sideways * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
 
@@ -32,13 +33,13 @@ public class player : MonoBehaviour
         {
             box.AddForce(-sideways * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         }
-        
-        if (IsGrounded() && Input.GetKey("space") )
+
+        if (IsGrounded() && Input.GetKey("space"))
         {
             box.AddForce(0, jump, 0, ForceMode.Impulse);
-          //  audi.Play();
+            //  audi.Play();
         }
-       
+
         if (box.position.y < -1f)
         {
             FindObjectOfType<GameManager>().death();
@@ -46,7 +47,7 @@ public class player : MonoBehaviour
     }
     private bool IsGrounded()
     {
-     return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * .9f, groundlayer);
-        
+        return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * .9f, groundlayer);
+
     }
 }

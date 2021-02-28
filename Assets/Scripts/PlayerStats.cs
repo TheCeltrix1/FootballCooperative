@@ -7,43 +7,60 @@ public class PlayerStats : MonoBehaviour
 {
     public Slider healthSlider;
     public GameManager manager;
-   // public Image fill;
-
     public Slider staminaSlider;
-    // public Image stamFill;
-     void Start()
+
+    #region statistics
+    private float _stamina;
+    private float _totalMaxStamina;
+    private float _currentMaxStamina;
+
+    private float _health;
+    private float _totalMaxHealth;
+    private float _currentMaxHealth;
+    #endregion
+
+    void Start()
     {
-        manager = FindObjectOfType<GameManager>();
-        staminaSlider.value = FindObjectOfType<GameManager>().maxenergy;
-        SetHealth(); 
+        _stamina = GameManager.stamina;
+        _totalMaxStamina = GameManager.maxenergy;
+        _currentMaxStamina = GameManager.currentMaxStamina;
+
+        _health = GameManager.health;
+        _totalMaxHealth = GameManager.maxhealth;
+        _currentMaxHealth = GameManager.currentMaxHealth;
+
+        staminaSlider.value = GameManager.maxenergy;
+        SetMaxHealth(_totalMaxHealth);
+        SetMaxStamina(_totalMaxStamina);
+        SetCurrentHealth(_currentMaxHealth);
+        SetCurrentStamina(_currentMaxStamina);
     }
-    public void SetMaxHealth(int health)
+
+    #region Stat Settings
+    public void SetMaxHealth(float health)
     {
         healthSlider.maxValue = health;
-       // healthSlider.value = health;
     }
- //   public void SetHealth(int health)
-          public void SetHealth()
-    {
-      //  healthSlider.value = health;
-        healthSlider.value = manager.maxhealth;
-    }
-
-    public void SetMaxStamina(int stamina)
+    public void SetMaxStamina(float stamina)
     {
         staminaSlider.maxValue = stamina;
-        //staminaSlider.value = stamina;  
     }
-    public void SetStamina(int stamina)
+
+    public void SetCurrentHealth(float health)
+    {
+        healthSlider.value = health;
+    }
+
+    public void SetCurrentStamina(float stamina)
     {
         staminaSlider.value = stamina;
-      //  staminaSlider.value = FindObjectOfType<player2D>().energy;
+    }
+    #endregion
 
-    }
-     void Update()
+    void Update()
     {
-        healthSlider.value = FindObjectOfType<GameManager>().maxhealth;
-        staminaSlider.value = FindObjectOfType<player2D>().energy;
+        healthSlider.value = GameManager.health;
+        staminaSlider.value = GameManager.stamina;
     }
- 
+
 }
