@@ -27,6 +27,7 @@ namespace HomeCode
             _altPos = new Vector2(buttonHolder.transform.position.x, -buttonHolder.GetComponentInParent<Canvas>().GetComponent<RectTransform>().rect.height);
             _originalPos = buttonHolder.transform.position;
             buttonHolder.transform.position = _altPos;
+            buttonHolder.SetActive(false);
         }
 
         void Update()
@@ -51,6 +52,7 @@ namespace HomeCode
         public void Click(int i)
         {
             GameManager.maxenergy += energyIncrease;
+            Debug.Log(GameManager.maxenergy);
             ChooseActivity(i, buttonHolder);
         }
 

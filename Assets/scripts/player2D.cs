@@ -6,36 +6,38 @@ public class player2D : MonoBehaviour
 {
     public float speed = 3.0f;
     public float jump = 20.0f;
-    public float energy = 3f;
     public LayerMask JumpLayer;
     public Rigidbody2D playerRigidbody;
     public Collider2D playerCollider;
     public player2D play;
-    private float stamina;
-  //  public GameManager topenergy;
-    // Start is called before the first frame update
-    void Start()
-    {
-        energy = FindObjectOfType<GameManager>().maxenergy;
-      stamina =  FindObjectOfType<GameManager>().maxenergy;
 
+    #region statistics
+    public float stamina;
+    private float _totalMaxStamina;
+    private float _currentMaxStamina;
+    #endregion
+
+    void Awake()
+    {
+        stamina = GameManager.currentMaxStamina;
+        _totalMaxStamina = GameManager.maxenergy;
+        _currentMaxStamina = GameManager.currentMaxStamina;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(energy <=0 && stamina < 10 ){
+        if (stamina <= 0 && _currentMaxStamina < _totalMaxStamina)
+        {
             FindObjectOfType<GameManager>().gohome();
             Debug.Log("goinghome");
             return;
         }
-        if (energy <= 0 && stamina >= 10)
+        if (stamina <= 0 && _currentMaxStamina >= _totalMaxStamina)
         {
             // FindObjectOfType<GameManager>().gohome();
             Debug.Log("endgame");
             return;
         }
-        energy -= Time.deltaTime;
         transform.localRotation = Quaternion.Euler(0, 0, 0);
         transform.Translate(Vector2.right * speed * Time.deltaTime);
 
@@ -65,5 +67,5 @@ public class player2D : MonoBehaviour
             FindObjectOfType<GameManager>().death();
         }
     }
-  
+
 }

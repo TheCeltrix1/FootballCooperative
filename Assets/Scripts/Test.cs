@@ -39,6 +39,6 @@ public class Test : MonoBehaviour
     {
         Debug.Log("Getting Health");
         currentStamina += stamina;
-        playerStats.SetStamina(currentStamina);
+        playerStats.SetCurrentStamina(currentStamina);
     }
 }
