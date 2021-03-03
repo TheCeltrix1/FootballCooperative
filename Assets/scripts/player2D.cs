@@ -11,6 +11,8 @@ public class player2D : MonoBehaviour
     public Collider2D playerCollider;
     public player2D play;
 
+    [SerializeField] private Animator playerAnimator;
+
     #region statistics
     public float stamina;
     private float _totalMaxStamina;
@@ -40,6 +42,10 @@ public class player2D : MonoBehaviour
         }
         transform.localRotation = Quaternion.Euler(0, 0, 0);
         transform.Translate(Vector2.right * speed * Time.deltaTime);
+
+        //Animation
+        playerAnimator.SetFloat("speed", speed);
+        playerAnimator.SetBool("isGrounded", playerCollider.IsTouchingLayers(JumpLayer));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
