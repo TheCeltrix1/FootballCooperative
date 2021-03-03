@@ -10,7 +10,7 @@ public class souvenirs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     manager  =  FindObjectOfType<GameManager>();
+        manager = GameManager.instance;
         this.spirte = GetComponent<SpriteRenderer>();
         if (threshold <= manager.trips)
         {
