@@ -7,4 +7,5 @@ public class ObjectHolder : MonoBehaviour
 {
     public Slider healthSliderObject;
     public Slider staminaSliderObject;
+    public Slider progressSliderObject;
 }

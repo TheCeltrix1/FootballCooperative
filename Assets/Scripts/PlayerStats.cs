@@ -7,9 +7,12 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     public Slider healthSlider;
-    private GameManager manager;
     public Slider staminaSlider;
-    private GameObject objectHolder;
+
+    private GameManager manager;
+    private Slider _progressBar;
+    private GameObject _objectHolder;
+    private bool _progressBarAvailable;
 
     #region statistics
     private float _stamina;
@@ -28,12 +31,15 @@ public class PlayerStats : MonoBehaviour
 
     void Test(Scene scene, LoadSceneMode mode)
     {
-        objectHolder = GameObject.FindGameObjectWithTag("ObjectHolder");
-        if (objectHolder != null) 
+        _objectHolder = GameObject.FindGameObjectWithTag("ObjectHolder");
+        if (_objectHolder != null) 
         {
-            staminaSlider = objectHolder.GetComponent<ObjectHolder>().staminaSliderObject;
-            healthSlider = objectHolder.GetComponent<ObjectHolder>().healthSliderObject;
+            staminaSlider = _objectHolder.GetComponent<ObjectHolder>().staminaSliderObject;
+            healthSlider = _objectHolder.GetComponent<ObjectHolder>().healthSliderObject;
+            _progressBar = _objectHolder.GetComponent<ObjectHolder>().progressSliderObject;
         }
+        _progressBarAvailable = (_progressBar) ? true : false;
+        if (_progressBarAvailable) _progressBar.maxValue = GameManager.maxenergy;
 
         manager = GameManager.instance;
         _stamina = GameManager.stamina;
@@ -76,5 +82,6 @@ public class PlayerStats : MonoBehaviour
     {
         healthSlider.value = GameManager.health;
         staminaSlider.value = GameManager.stamina;
+        if (_progressBarAvailable) _progressBar.value = _currentMaxStamina - GameManager.stamina;
     }
 }
