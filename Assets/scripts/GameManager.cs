@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     bool gameover = false;
     public float delay = 2f;
+    public float trips;
     public GameObject completelvlUI;
     public GameObject tryagain;
     public static bool running = false;
@@ -40,7 +41,8 @@ public class GameManager : MonoBehaviour
         }
         stamina = currentMaxStamina;
         health = currentMaxHealth;
-        //DontDestroyOnLoad(this.gameObject);
+     //   DontDestroyOnLoad(this.gameObject);
+        
     }
 
     private void Update()
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("loading");
         currentMaxStamina += 2;
         currentMaxHealth += 1;
+        trips += 1;
         SceneManager.LoadScene("blah");
         CancelInvoke("mainmenu");
     }
