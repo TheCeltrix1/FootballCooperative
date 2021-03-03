@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject completelvlUI;
     public GameObject tryagain;
     public static bool running = false;
+
     private player2D _playerScript;
     private PlayerStats _playerSliderStats;
 
