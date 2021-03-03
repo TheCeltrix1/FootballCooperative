@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     bool gameover = false;
     public float delay = 2f;
     public GameObject completelvlUI;
@@ -25,7 +27,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (FindObjectOfType<player2D>()) 
+        if (instance != null) Destroy(gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        SceneManager.sceneLoaded += Test;
+    }
+
+    private void Test(Scene scene, LoadSceneMode mode)
+    {
+        if (FindObjectOfType<player2D>())
         {
             _playerScript = FindObjectOfType<player2D>();
             running = true;
@@ -40,16 +53,21 @@ public class GameManager : MonoBehaviour
         }
         stamina = currentMaxStamina;
         health = currentMaxHealth;
-        //DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
     {
-        if (running) {
+        if (running)
+        {
             stamina -= Time.deltaTime;
             _playerScript.stamina = stamina;
             _playerSliderStats.SetCurrentHealth(health);
             _playerSliderStats.SetCurrentStamina(stamina);
+        }
+        else
+        {
+            stamina = currentMaxStamina;
+            health = currentMaxHealth;
         }
     }
 

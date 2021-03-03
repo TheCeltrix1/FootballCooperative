@@ -9,7 +9,7 @@ namespace HomeCode
     {
         public AudioClip[] audioClips;
         public GameObject buttonHolder;
-        public float energyIncrease = 5;
+        public float energyIncrease = 1;
         public float timerLength;
         private float _timer;
         private bool _moveButtonHolder;
@@ -43,6 +43,7 @@ namespace HomeCode
 
         public void ResetActivities()
         {
+            //renable all button pushing.
             buttonHolder.transform.position = _altPos;
             buttonHolder.SetActive(true);
             _timer = 0;
@@ -51,9 +52,9 @@ namespace HomeCode
 
         public void Click(int i)
         {
-            GameManager.maxenergy += energyIncrease;
-            Debug.Log(GameManager.maxenergy);
+            GameManager.currentMaxStamina += energyIncrease;
             ChooseActivity(i, buttonHolder);
+            //Disable all button pushing.
         }
 
         void ChooseActivity(int i, GameObject obj = default(GameObject))
