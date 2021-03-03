@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 2
+  trips: 0
   completelvlUI: {fileID: 0}
   tryagain: {fileID: 0}
 --- !u!114 &280947665
