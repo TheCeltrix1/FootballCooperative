@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         if (FindObjectOfType<PlayerStats>())
         {
             _playerSliderStats = FindObjectOfType<PlayerStats>();
+            if (running) _playerSliderStats.progressBarMax = _playerScript.endPos - _playerScript.transform.position.x;
         }
         stamina = currentMaxStamina;
         health = currentMaxHealth;
@@ -65,6 +66,7 @@ public class GameManager : MonoBehaviour
             _playerScript.stamina = stamina;
             _playerSliderStats.SetCurrentHealth(health);
             _playerSliderStats.SetCurrentStamina(stamina);
+            _playerSliderStats.progressBar = _playerScript.gameObject.transform.position.x - _playerScript.startPos;
         }
         else
         {

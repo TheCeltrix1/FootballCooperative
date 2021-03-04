@@ -299,6 +299,8 @@ MonoBehaviour:
   playerRigidbody: {fileID: 335936169}
   playerCollider: {fileID: 335936167}
   play: {fileID: 335936173}
+  endPos: 0
+  startPos: 0
   playerAnimator: {fileID: 335936170}
   stamina: 0
 --- !u!1 &339643000
@@ -363,6 +365,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 400957395}
   staminaSlider: {fileID: 1117052297}
+  progressBar: 0
+  progressBarMax: 0
 --- !u!1 &346938522
 GameObject:
   m_ObjectHideFlags: 0

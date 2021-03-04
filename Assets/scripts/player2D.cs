@@ -10,6 +10,8 @@ public class player2D : MonoBehaviour
     public Rigidbody2D playerRigidbody;
     public Collider2D playerCollider;
     public player2D play;
+    public float endPos;
+    public float startPos;
 
     [SerializeField] private Animator playerAnimator;
 
@@ -24,6 +26,8 @@ public class player2D : MonoBehaviour
         stamina = GameManager.currentMaxStamina;
         _totalMaxStamina = GameManager.maxenergy;
         _currentMaxStamina = GameManager.currentMaxStamina;
+        endPos = transform.position.x + speed * _totalMaxStamina;
+        startPos = transform.position.x;
     }
 
     void Update()
