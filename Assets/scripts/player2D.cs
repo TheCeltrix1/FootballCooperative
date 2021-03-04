@@ -11,6 +11,14 @@ public class player2D : MonoBehaviour
     public Collider2D playerCollider;
     public player2D play;
 
+    //Second Player Character code
+    public bool jumping = false;
+    public Vector2 backgroundBallPosition = new Vector2(3,3);
+    public Vector2 foregroundBallPosition = new Vector2(3, 3);
+    public GameObject currentBallPosition;
+    private Vector2 _targetPosition; 
+
+
     [SerializeField] private Animator playerAnimator;
 
     #region statistics
@@ -24,6 +32,10 @@ public class player2D : MonoBehaviour
         stamina = GameManager.currentMaxStamina;
         _totalMaxStamina = GameManager.maxenergy;
         _currentMaxStamina = GameManager.currentMaxStamina;
+
+
+
+        
     }
 
     void Update()
@@ -51,7 +63,25 @@ public class player2D : MonoBehaviour
         {
             Jump();
             //GetComponent<Rigidbody2D> ().AddForce (Vector2.up * jump);
+            jumping = true;
         }
+        else
+        {
+            jumping = false;
+        }
+
+        //Second Player Character code and passing the ball
+        if (!playerCollider.IsTouchingLayers(JumpLayer) && jumping)
+        {
+            _targetPosition = backgroundBallPosition;
+        }
+        else if (playerCollider.IsTouchingLayers(JumpLayer) && !jumping)
+        {
+            _targetPosition = foregroundBallPosition;
+        }
+
+        currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, new Vector2(transform.position.x, transform.position.y) + _targetPosition, 15 * Time.deltaTime );
+
 
     }
     void Jump()
