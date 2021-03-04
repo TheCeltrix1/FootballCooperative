@@ -6,6 +6,8 @@ public class Player_walking : MonoBehaviour
 {
     public float movementspeed = 1;
     public bool facingRight = true;
+
+    [SerializeField] private Animator playerAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,9 @@ public class Player_walking : MonoBehaviour
     {
         var movement = Input.GetAxis("Horizontal");
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementspeed;
+
+        //Animation
+        playerAnimator.SetFloat("speed", Mathf.Abs(movement));
 
         if (Input.GetKeyDown(KeyCode.A))
         {
