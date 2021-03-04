@@ -18,8 +18,8 @@ TagManager:
   - 
   - ground
   - block
-  - 
-  - 
+  - Shoes
+  - frame
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: front
+    uniqueID: 1945775667
     locked: 0
