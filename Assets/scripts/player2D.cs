@@ -12,7 +12,6 @@ public class player2D : MonoBehaviour
     public player2D play;
 
     [SerializeField] private Animator playerAnimator;
- 
 
     #region statistics
     public float stamina;
@@ -47,8 +46,6 @@ public class player2D : MonoBehaviour
         //Animation
         playerAnimator.SetFloat("speed", speed);
         playerAnimator.SetBool("isGrounded", playerCollider.IsTouchingLayers(JumpLayer));
-    
-        
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
