@@ -255,6 +255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 953669492}
+  - {fileID: 1573707157}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,10 +280,11 @@ MonoBehaviour:
   endPos: 0
   startPos: 0
   jumping: 0
+  currentBallPosition: {fileID: 1573707155}
   backgroundBallPosition: {x: 4, y: 0}
   foregroundBallPosition: {x: 2, y: 0}
-  currentBallPosition: {fileID: 1573707155}
   breathingAnimationName: playerHomeWalk
+  kickAnimationName: 
   stamina: 0
 --- !u!1 &339643000
 GameObject:
@@ -1381,12 +1383,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573707155}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.15, y: 0.92, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.0720596, y: -0.50999993, z: 2.58}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 335936172}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1750838589
 GameObject:

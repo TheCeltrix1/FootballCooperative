@@ -75,14 +75,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void death()
+    public void death(float deathDelay)
     {
         Debug.Log("death");
         if (gameover == false)
         {
             //   gameover = true;
             //  tryagain.SetActive(true);
-            Invoke("restart", delay);
+            Invoke("restart", deathDelay);
         }
     }
 
