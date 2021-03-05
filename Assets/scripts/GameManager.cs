@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     bool gameover = false;
     public float delay = 2f;
     public float trips;
-    public GameObject completelvlUI;
-    public GameObject tryagain;
+    public GameObject completelvlUI; // Is this used?
+    public GameObject tryagain; // Is this used?
     public static bool running = false;
 
     private player2D _playerScript;
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         if (FindObjectOfType<PlayerStats>())
         {
             _playerSliderStats = FindObjectOfType<PlayerStats>();
+            if (running) _playerSliderStats.progressBarMax = _playerScript.endPos - _playerScript.transform.position.x;
         }
         stamina = currentMaxStamina;
         health = currentMaxHealth;
@@ -65,6 +66,7 @@ public class GameManager : MonoBehaviour
             _playerScript.stamina = stamina;
             _playerSliderStats.SetCurrentHealth(health);
             _playerSliderStats.SetCurrentStamina(stamina);
+            _playerSliderStats.progressBar = _playerScript.gameObject.transform.position.x - _playerScript.startPos;
         }
         else
         {
@@ -73,30 +75,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void endlevel()
-    {
-        completelvlUI.SetActive(true);
-    }
-
-    public void death()
+    public void death(float deathDelay)
     {
         Debug.Log("death");
         if (gameover == false)
         {
             //   gameover = true;
             //  tryagain.SetActive(true);
-            Invoke("restart", delay);
+            Invoke("restart", deathDelay);
         }
     }
 
-    public void gohome()
+    public void gohome(float time)
     {
-        Invoke("mainmenu", 0.1f);
-    }
-
-    public void endgame()
-    {
-        completelvlUI.SetActive(true);
+        Invoke("mainmenu", time);
     }
 
     void restart()
@@ -113,5 +105,16 @@ public class GameManager : MonoBehaviour
         trips += 1;
         SceneManager.LoadScene("blah");
         CancelInvoke("mainmenu");
+    }
+
+    //I don't know what these do or if they are even used.
+    public void endgame()
+    {
+        completelvlUI.SetActive(true);
+    }
+
+    public void endlevel()
+    {
+        completelvlUI.SetActive(true);
     }
 }

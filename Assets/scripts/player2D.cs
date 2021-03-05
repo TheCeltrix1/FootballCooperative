@@ -7,19 +7,33 @@ public class player2D : MonoBehaviour
     public float speed = 3.0f;
     public float jump = 20.0f;
     public LayerMask JumpLayer;
-    public Rigidbody2D playerRigidbody;
-    public Collider2D playerCollider;
     public player2D play;
+    public float endPos;
+    public float startPos;
 
     //Second Player Character code
     public bool jumping = false;
-    public Vector2 backgroundBallPosition = new Vector2(3,3);
-    public Vector2 foregroundBallPosition = new Vector2(3, 3);
     public GameObject currentBallPosition;
-    private Vector2 _targetPosition; 
+    public Vector2 backgroundBallPosition = new Vector2(3, 3);
+    public Vector2 foregroundBallPosition = new Vector2(3, 3);
+    private float _ballTransitionSpeed = 0.25f;
+    private float _ballTransitionStage;
+    private float _ballForegroundScale = 1;
+    private float _ballBackgroundScale = .5f;
 
+    private Vector2 _targetPosition;
+    private Collider2D _playerCollider;
+    private Rigidbody2D _playerRigidbody;
+    private bool _endAnimation = false;
 
-    [SerializeField] private Animator playerAnimator;
+    public string breathingAnimationName;
+    public string kickAnimationName;
+    public string fallAnimationName;
+    private float _playerSlowdownTime = .5f;
+    private float _playerSlowdownTimer;
+    private Animator _playerAnimator;
+    private float animationDelaytime;
+    private RuntimeAnimatorController _animatorRTC;
 
     #region statistics
     public float stamina;
@@ -33,32 +47,58 @@ public class player2D : MonoBehaviour
         _totalMaxStamina = GameManager.maxenergy;
         _currentMaxStamina = GameManager.currentMaxStamina;
 
+        _endAnimation = false;
+        startPos = transform.position.x;
+        endPos = transform.position.x + speed * _totalMaxStamina;
 
+        _playerSlowdownTimer = _playerSlowdownTime;
+        _playerRigidbody = GetComponent<Rigidbody2D>();
+        _playerCollider = GetComponent<Collider2D>();
+        _playerAnimator = GetComponent<Animator>();
+        _playerAnimator.SetBool("noStamina", false);
 
-        
     }
 
     void Update()
     {
-        if (stamina <= 0 && _currentMaxStamina < _totalMaxStamina)
+        #region Stamina Management
+        if (stamina <= 0 && _currentMaxStamina < _totalMaxStamina && !_endAnimation)
         {
-            FindObjectOfType<GameManager>().gohome();
-            Debug.Log("goinghome");
+            if (_playerCollider.IsTouchingLayers(JumpLayer))
+            {
+                _endAnimation = true;
+                StartCoroutine("StopMoving");
+                _playerAnimator.SetBool("noStamina", true);
+                _playerAnimator.SetBool("maxStamina", true);
+                animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
+                GameManager.instance.gohome(animationDelaytime);
+            }
             return;
         }
-        if (stamina <= 0 && _currentMaxStamina >= _totalMaxStamina)
+        else if (stamina <= 0 && _currentMaxStamina >= _totalMaxStamina && !_endAnimation)
         {
-            // FindObjectOfType<GameManager>().gohome();
-            Debug.Log("endgame");
+            if (_playerCollider.IsTouchingLayers(JumpLayer))
+            {
+                _endAnimation = true;
+                StartCoroutine("StopMoving");
+                _playerAnimator.SetBool("noStamina", true);
+                _playerAnimator.SetBool("maxStamina", true);
+                animationDelaytime = AnimatorNextClipLength(kickAnimationName);
+
+                //GAME COMPLETE SHENANIGANS
+                Debug.Log("endgame");
+            }
             return;
         }
+        #endregion
         transform.localRotation = Quaternion.Euler(0, 0, 0);
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        if (!_endAnimation) _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
 
         //Animation
-        playerAnimator.SetFloat("speed", speed);
-        playerAnimator.SetBool("isGrounded", playerCollider.IsTouchingLayers(JumpLayer));
+        _playerAnimator.SetFloat("speed", speed);
+        _playerAnimator.SetBool("isGrounded", _playerCollider.IsTouchingLayers(JumpLayer));
 
+        #region Movement
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
@@ -69,39 +109,74 @@ public class player2D : MonoBehaviour
         {
             jumping = false;
         }
+        #endregion
 
-        //Second Player Character code and passing the ball
-        if (!playerCollider.IsTouchingLayers(JumpLayer) && jumping)
-        {
-            _targetPosition = backgroundBallPosition;
-        }
-        else if (playerCollider.IsTouchingLayers(JumpLayer) && !jumping)
-        {
-            _targetPosition = foregroundBallPosition;
-        }
+        #region Kick to background
+        StartCoroutine("PassBall");
 
-        currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, new Vector2(transform.position.x, transform.position.y) + _targetPosition, 15 * Time.deltaTime );
-
-
+        #endregion
     }
     void Jump()
     {
-        if (!playerCollider.IsTouchingLayers(JumpLayer))
+        if (!_playerCollider.IsTouchingLayers(JumpLayer))
         {
             return;
         }
         Vector2 jumpVelocityToAdd = new Vector2(0f, jump);
-        playerRigidbody.velocity += jumpVelocityToAdd;
+        _playerRigidbody.velocity += jumpVelocityToAdd;
 
     }
+
+    #region Animator Clip Info Finder
+
+    public float AnimatorNextClipLength(string name)
+    {
+        _animatorRTC = _playerAnimator.runtimeAnimatorController;
+        for (int i = 0; i < _animatorRTC.animationClips.Length; i++)
+        {
+            if (_animatorRTC.animationClips[i].name == name) return _animatorRTC.animationClips[i].length;
+        }
+        return 1f;
+    }
+
+    #endregion
+
+    #region Coroutines
+    private IEnumerator StopMoving()
+    {
+        _playerRigidbody.velocity = new Vector2(Mathf.Lerp(speed,0, 1 - (_playerSlowdownTimer / _playerSlowdownTime)), _playerRigidbody.velocity.y);
+        _playerSlowdownTimer -= Time.deltaTime;
+        if (_playerRigidbody.velocity.magnitude == 0) StopCoroutine("StopMoving");
+        yield return null;
+    }
+
+    private IEnumerator PassBall()
+    {
+        if (!_playerCollider.IsTouchingLayers(JumpLayer))
+        {
+            _targetPosition = backgroundBallPosition;
+            _ballTransitionStage += Time.deltaTime;
+        }
+        else
+        {
+            _targetPosition = foregroundBallPosition;
+            _ballTransitionStage -= Time.deltaTime;
+        }
+        _ballTransitionStage = Mathf.Clamp(_ballTransitionStage,0,_ballTransitionSpeed);
+        currentBallPosition.transform.position = new Vector2(transform.position.x, transform.position.y) + Vector2.Lerp(foregroundBallPosition, backgroundBallPosition, _ballTransitionStage / _ballTransitionSpeed);
+        yield return null;
+    }
+    #endregion
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "block")
         {
             Debug.Log("hit");
             play.enabled = false;
-            FindObjectOfType<GameManager>().death();
+
+            animationDelaytime = AnimatorNextClipLength(fallAnimationName);
+            GameManager.instance.death(animationDelaytime * 2);
         }
     }
-
 }
