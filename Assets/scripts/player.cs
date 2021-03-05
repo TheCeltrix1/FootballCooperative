@@ -42,7 +42,7 @@ public class player : MonoBehaviour
 
         if (box.position.y < -1f)
         {
-            FindObjectOfType<GameManager>().death();
+            FindObjectOfType<GameManager>().death(2);
         }
     }
     private bool IsGrounded()

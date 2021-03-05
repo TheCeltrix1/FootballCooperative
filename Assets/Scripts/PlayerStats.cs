@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
 {
     public Slider healthSlider;
     public Slider staminaSlider;
+    public float progressBar;
+    public float progressBarMax;
 
     private GameManager manager;
     private Slider _progressBar;
@@ -32,14 +34,13 @@ public class PlayerStats : MonoBehaviour
     void Test(Scene scene, LoadSceneMode mode)
     {
         _objectHolder = GameObject.FindGameObjectWithTag("ObjectHolder");
-        if (_objectHolder != null) 
+        if (_objectHolder != null)
         {
             staminaSlider = _objectHolder.GetComponent<ObjectHolder>().staminaSliderObject;
             healthSlider = _objectHolder.GetComponent<ObjectHolder>().healthSliderObject;
             _progressBar = _objectHolder.GetComponent<ObjectHolder>().progressSliderObject;
         }
         _progressBarAvailable = (_progressBar) ? true : false;
-        if (_progressBarAvailable) _progressBar.maxValue = GameManager.maxenergy;
 
         manager = GameManager.instance;
         _stamina = GameManager.stamina;
@@ -78,10 +79,16 @@ public class PlayerStats : MonoBehaviour
     }
     #endregion
 
+    private void ProgressBar()
+    {
+        _progressBar.maxValue = progressBarMax;
+        _progressBar.value = progressBar;
+    }
+
     void Update()
     {
         healthSlider.value = GameManager.health;
         staminaSlider.value = GameManager.stamina;
-        if (_progressBarAvailable) _progressBar.value = _currentMaxStamina - GameManager.stamina;
+        if (_progressBarAvailable) ProgressBar();
     }
 }

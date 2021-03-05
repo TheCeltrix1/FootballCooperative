@@ -10,7 +10,7 @@ public class collision : MonoBehaviour
         if(collision.collider.tag == "block")
         {
             play.enabled = false;
-            FindObjectOfType<GameManager>().death();
+            FindObjectOfType<GameManager>().death(1);
         }
     }
 

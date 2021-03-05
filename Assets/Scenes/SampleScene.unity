@@ -176,7 +176,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 335936172}
-  - component: {fileID: 335936168}
   - component: {fileID: 335936173}
   - component: {fileID: 335936169}
   - component: {fileID: 335936167}
@@ -204,26 +203,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
---- !u!114 &335936168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 335936166}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55fd1afe5a17aaa488d9ac5370830bf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  box: {fileID: 0}
-  col: {fileID: 0}
-  groundlayer:
-    serializedVersion: 2
-    m_Bits: 256
-  forwardspeed: 1000
-  sideways: 20
-  jump: 1
 --- !u!50 &335936169
 Rigidbody2D:
   serializedVersion: 4
@@ -244,7 +223,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &335936170
 Animator:
   serializedVersion: 3
@@ -276,6 +255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 953669492}
+  - {fileID: 1573707157}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -296,14 +276,15 @@ MonoBehaviour:
   JumpLayer:
     serializedVersion: 2
     m_Bits: 256
-  playerRigidbody: {fileID: 335936169}
-  playerCollider: {fileID: 335936167}
   play: {fileID: 335936173}
+  endPos: 0
+  startPos: 0
   jumping: 0
+  currentBallPosition: {fileID: 1573707155}
   backgroundBallPosition: {x: 4, y: 0}
   foregroundBallPosition: {x: 2, y: 0}
-  currentBallPosition: {fileID: 1573707155}
-  playerAnimator: {fileID: 335936170}
+  breathingAnimationName: playerHomeWalk
+  kickAnimationName: 
   stamina: 0
 --- !u!1 &339643000
 GameObject:
@@ -347,7 +328,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339643000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.603973, y: -6.888708, z: 8.901665}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -367,6 +348,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 400957395}
   staminaSlider: {fileID: 1117052297}
+  progressBar: 0
+  progressBarMax: 0
 --- !u!1 &346938522
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +477,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &400957392
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +606,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!61 &492495577
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1400,12 +1383,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1573707155}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.15, y: 0.92, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.0720596, y: -0.50999993, z: 2.58}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 335936172}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1750838589
 GameObject:
