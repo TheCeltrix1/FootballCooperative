@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     bool gameover = false;
     public float delay = 2f;
     public float trips;
-    public GameObject completelvlUI;
-    public GameObject tryagain;
+    public GameObject completelvlUI; // Is this used?
+    public GameObject tryagain; // Is this used?
     public static bool running = false;
 
     private player2D _playerScript;
@@ -75,11 +75,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void endlevel()
-    {
-        completelvlUI.SetActive(true);
-    }
-
     public void death()
     {
         Debug.Log("death");
@@ -91,14 +86,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void gohome()
+    public void gohome(float time)
     {
-        Invoke("mainmenu", 0.1f);
-    }
-
-    public void endgame()
-    {
-        completelvlUI.SetActive(true);
+        Invoke("mainmenu", time);
     }
 
     void restart()
@@ -115,5 +105,16 @@ public class GameManager : MonoBehaviour
         trips += 1;
         SceneManager.LoadScene("blah");
         CancelInvoke("mainmenu");
+    }
+
+    //I don't know what these do or if they are even used.
+    public void endgame()
+    {
+        completelvlUI.SetActive(true);
+    }
+
+    public void endlevel()
+    {
+        completelvlUI.SetActive(true);
     }
 }

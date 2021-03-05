@@ -7,47 +7,48 @@ public class Player_walking : MonoBehaviour
     public float movementspeed = 1;
     public bool facingRight = true;
 
-    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private Animator _playerAnimator;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        if (GetComponent<Animator>()) _playerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        var movement = Input.GetAxis("Horizontal");
-        transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementspeed;
-
-        //Animation
-        playerAnimator.SetFloat("speed", Mathf.Abs(movement));
-
-        if (Input.GetKeyDown(KeyCode.A))
+        if (_playerAnimator != null)
         {
-            Flip();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Flip();
+            var movement = Input.GetAxis("Horizontal");
+            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementspeed;
+
+            //Animation
+            _playerAnimator.SetFloat("speed", Mathf.Abs(movement));
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Flip();
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Flip();
+            }
         }
     }
 
 
     void Flip()
     {
-        if(facingRight == true)
+        if (facingRight)
         {
-            facingRight = !facingRight;
             transform.Rotate(0f, 180f, 0f);
             Debug.Log("left");
-            return;
         }
-        if (!facingRight == true)
+        else if (!facingRight)
         {
-            facingRight = true;
             transform.Rotate(0f, 0f, 0f);
             Debug.Log("right");
         }
+        facingRight = !facingRight;
     }
 }

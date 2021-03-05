@@ -34,7 +34,7 @@ public class PlayerStats : MonoBehaviour
     void Test(Scene scene, LoadSceneMode mode)
     {
         _objectHolder = GameObject.FindGameObjectWithTag("ObjectHolder");
-        if (_objectHolder != null) 
+        if (_objectHolder != null)
         {
             staminaSlider = _objectHolder.GetComponent<ObjectHolder>().staminaSliderObject;
             healthSlider = _objectHolder.GetComponent<ObjectHolder>().healthSliderObject;
@@ -56,11 +56,6 @@ public class PlayerStats : MonoBehaviour
         SetMaxStamina(_totalMaxStamina);
         SetCurrentHealth(_currentMaxHealth);
         SetCurrentStamina(_currentMaxStamina);
-    }
-
-    private void Start()
-    {
-        if (_progressBarAvailable) _progressBar.maxValue = progressBarMax;
     }
 
     #region Stat Settings
@@ -86,6 +81,7 @@ public class PlayerStats : MonoBehaviour
 
     private void ProgressBar()
     {
+        _progressBar.maxValue = progressBarMax;
         _progressBar.value = progressBar;
     }
 
