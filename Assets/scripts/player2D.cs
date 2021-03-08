@@ -18,8 +18,9 @@ public class player2D : MonoBehaviour
     public Vector2 foregroundBallPosition = new Vector2(3, 3);
     private float _ballTransitionSpeed = 0.25f;
     private float _ballTransitionStage;
-    private float _ballForegroundScale = 1;
-    private float _ballBackgroundScale = .5f;
+    private float _ballForegroundScale = 3;
+    private float _ballBackgroundScale = 1.5f;
+    private float _ballYPosition;
 
     private Vector2 _targetPosition;
     private Collider2D _playerCollider;
@@ -56,7 +57,7 @@ public class player2D : MonoBehaviour
         _playerCollider = GetComponent<Collider2D>();
         _playerAnimator = GetComponent<Animator>();
         _playerAnimator.SetBool("noStamina", false);
-
+        _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
     }
 
     void Update()
@@ -163,7 +164,9 @@ public class player2D : MonoBehaviour
             _ballTransitionStage -= Time.deltaTime;
         }
         _ballTransitionStage = Mathf.Clamp(_ballTransitionStage,0,_ballTransitionSpeed);
-        currentBallPosition.transform.position = new Vector2(transform.position.x, transform.position.y) + Vector2.Lerp(foregroundBallPosition, backgroundBallPosition, _ballTransitionStage / _ballTransitionSpeed);
+        currentBallPosition.transform.position = new Vector2(transform.position.x, _ballYPosition) + Vector2.Lerp(foregroundBallPosition, backgroundBallPosition, _ballTransitionStage / _ballTransitionSpeed);
+        float scale = Mathf.Lerp(_ballForegroundScale, _ballBackgroundScale, _ballTransitionStage / _ballTransitionSpeed);
+        currentBallPosition.transform.localScale = new Vector3(scale,scale,scale);
         yield return null;
     }
     #endregion
