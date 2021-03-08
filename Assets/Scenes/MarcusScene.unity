@@ -325,6 +325,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 1883925756}
   staminaSlider: {fileID: 1296817322}
+  progressBar: 0
+  progressBarMax: 0
 --- !u!1 &310918710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,7 +1050,7 @@ PrefabInstance:
     - target: {fileID: 2730974182505540524, guid: 1906355bc59d21248bb2f41762feea4f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2730974182505540524, guid: 1906355bc59d21248bb2f41762feea4f,
         type: 3}
@@ -1388,7 +1390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8, y: -446}
+  m_AnchoredPosition: {x: -7.999939, y: -446}
   m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1161765217
@@ -1586,11 +1588,11 @@ RectTransform:
   m_Father: {fileID: 1272235284}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -550, y: -137}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 683, y: 380}
   m_SizeDelta: {x: 500, y: 60}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296817322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2174,11 +2176,11 @@ RectTransform:
   m_Father: {fileID: 1272235284}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -550, y: -57.00003}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 683.00006, y: 478.99988}
   m_SizeDelta: {x: 500, y: 60}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1883925756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,8 +2266,8 @@ Camera:
   m_GameObject: {fileID: 1928722687}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
