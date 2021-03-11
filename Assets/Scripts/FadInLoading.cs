@@ -26,11 +26,14 @@ public class FadInLoading : MonoBehaviour
         }
     }
 
-    public void LoadingScreem()
+    public void LoadingScreem(Transform trans)
     {
-        fadIn.CrossFadeAlpha(1, 2, false);
-        fadInWeel.CrossFadeAlpha(1, 2, false);
-        loaded = true;
+        if (Vector3.Distance(trans.position,GameManager.instance.playerWalking.gameObject.transform.position) <= 30) 
+        {
+            fadIn.CrossFadeAlpha(1, 2, false);
+            fadInWeel.CrossFadeAlpha(1, 2, false);
+            loaded = true;
+        }
     }
 
     public static IEnumerator LoadTransition(float duration, GameObject obj = default(GameObject))
