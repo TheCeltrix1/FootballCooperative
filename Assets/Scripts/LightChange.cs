@@ -33,13 +33,21 @@ public class LightChange : MonoBehaviour
        
         if (ChangeIntenity)
         {
-            mylight.intensity = Mathf.PingPong(Time.time * intensityspeed, maxintenisty);
+           // mylight.intensity = Mathf.PingPong(Time.time * intensityspeed, maxintenisty);
+         
         }
         if (changecolours)
         {
-            float t = (Mathf.Sin(Time.time - starttime * colourchangespeed));
-            mylight.color = Color.Lerp(startcolour, Endcolour, t);
+            //  float t = (Mathf.Sin(Time.time - starttime * colourchangespeed));
+            //  mylight.color = Color.Lerp(startcolour, Endcolour, t);
+            changecolor();
         }
+    }
+    void changecolor()
+    {
+        float t = (Mathf.Sin(Time.time - starttime * colourchangespeed));
+        mylight.color = Color.Lerp(startcolour, Endcolour, t);
+        changecolours = false;
     }
 
 }

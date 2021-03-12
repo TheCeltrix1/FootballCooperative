@@ -1231,6 +1231,7 @@ MonoBehaviour:
   buttonHolder: {fileID: 933378659}
   energyIncrease: 0.25
   timerLength: 2
+  lc: {fileID: 1127129460}
   clockAnimation: {fileID: 1315536099}
   clock: {fileID: 1315536096}
 --- !u!1001 &871274719
@@ -1802,7 +1803,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127129457}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70f9cb80776524e41aacc40d02cf76d5, type: 3}
   m_Name: 
@@ -1812,7 +1813,7 @@ MonoBehaviour:
   intensityspeed: 1
   maxintenisty: 10
   changecolours: 0
-  colourchangespeed: 1
+  colourchangespeed: 10
   startcolour: {r: 0, g: 0, b: 0, a: 0}
   Endcolour: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1 &1161210674

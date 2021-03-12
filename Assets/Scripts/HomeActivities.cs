@@ -18,7 +18,7 @@ namespace HomeCode
         private Vector3 _originalPos;
         private AudioSource _audioSource;
 
-
+        public LightChange lc;
 
         //animation
         public Animator clockAnimation;
@@ -38,6 +38,7 @@ namespace HomeCode
             //animation
            clockAnimation = clock.GetComponent<Animator>();
            clockAnimation.SetBool("clockStart", false);
+
         }
 
         void Update()
@@ -46,6 +47,7 @@ namespace HomeCode
             {
                 _timer += Time.deltaTime;
                 buttonHolder.transform.position = Vector3.Lerp(_altPos, _originalPos, _timer / timerLength);
+                lc.changecolours = false;
             }
             else _moveButtonHolder = false;
         }
@@ -60,6 +62,9 @@ namespace HomeCode
 
             //Clock animation
             //clockAnimation.SetBool("clockStart", false);
+
+            //light change
+          //  lc.changecolours = false;
         }
 
         public void Click(int i)
@@ -70,6 +75,9 @@ namespace HomeCode
 
             //Clock animation
             clockAnimation.SetBool("clockStart", true);
+
+            //light change
+            lc.changecolours = true;
 
         }
 
@@ -88,6 +96,7 @@ namespace HomeCode
         public void ResetActivitesBar(Transform trans)
         {
             if (Vector3.Distance(trans.position, GameManager.instance.playerWalking.gameObject.transform.position) <= 30) ResetActivities();
+       
         }
     }
 }
