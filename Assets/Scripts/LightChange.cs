@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class LightChange : MonoBehaviour
 {
-    public Light mylight;
+  
+    public Light2D mylight;
     //Range Variables
-    public bool changeRange = false;
-    public float rangeSpeed = 1.0f;
-    public float maxRange = 10.0f;
+
     //Intensity Variables
     public bool ChangeIntenity = false;
-    public float intensitychangespeed = 1.0f;
+    public float intensityspeed = 1.0f;
     public float maxintenisty = 10.0f;
     // colour variables
     public bool changecolours = false;
@@ -23,20 +23,17 @@ public class LightChange : MonoBehaviour
 
     void Start()
     {
-        mylight = GetComponent<Light>();
+        mylight = GetComponent<Light2D>();
         starttime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (changeRange)
-        {
-            mylight.range = Mathf.PingPong(Time.time * rangeSpeed, maxRange);
-        }
+       
         if (ChangeIntenity)
         {
-            mylight.intensity = Mathf.PingPong(Time.time * intensitychangespeed, maxintenisty);
+            mylight.intensity = Mathf.PingPong(Time.time * intensityspeed, maxintenisty);
         }
         if (changecolours)
         {
