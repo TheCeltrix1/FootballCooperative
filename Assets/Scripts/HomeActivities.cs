@@ -14,8 +14,8 @@ namespace HomeCode
         private float _timer;
         private bool _moveButtonHolder;
 
-        private Vector2 _altPos;
-        private Vector2 _originalPos;
+        private Vector3 _altPos;
+        private Vector3 _originalPos;
         private AudioSource _audioSource;
 
         void Awake()
@@ -24,7 +24,7 @@ namespace HomeCode
             _audioSource = GetComponent<AudioSource>();
             _audioSource.playOnAwake = false;
             _audioSource.volume = 0.25f;
-            _altPos = new Vector2(buttonHolder.transform.position.x, -buttonHolder.GetComponentInParent<Canvas>().GetComponent<RectTransform>().rect.height);
+            _altPos = new Vector3(buttonHolder.transform.position.x, -buttonHolder.GetComponentInParent<Canvas>().GetComponent<RectTransform>().rect.height, buttonHolder.transform.position.z);
             _originalPos = buttonHolder.transform.position;
             buttonHolder.transform.position = _altPos;
             buttonHolder.SetActive(false);
@@ -32,11 +32,10 @@ namespace HomeCode
 
         void Update()
         {
-            if (Input.GetKeyDown("k")) ResetActivities();
             if (_moveButtonHolder && _timer < timerLength)
             {
                 _timer += Time.deltaTime;
-                buttonHolder.transform.position = Vector2.Lerp(_altPos, _originalPos, _timer / timerLength);
+                buttonHolder.transform.position = Vector3.Lerp(_altPos, _originalPos, _timer / timerLength);
             }
             else _moveButtonHolder = false;
         }
@@ -67,6 +66,11 @@ namespace HomeCode
                 StartCoroutine(rou);
             }
             else Debug.Log($"{i} is out of bounds");
+        }
+
+        public void ResetActivitesBar(Transform trans)
+        {
+            if (Vector3.Distance(trans.position, GameManager.instance.playerWalking.gameObject.transform.position) <= 30) ResetActivities();
         }
     }
 }
