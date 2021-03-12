@@ -18,6 +18,12 @@ namespace HomeCode
         private Vector3 _originalPos;
         private AudioSource _audioSource;
 
+
+
+        //animation
+        public Animator clockAnimation;
+        public GameObject clock;
+
         void Awake()
         {
             if (GetComponent<AudioSource>() == false) gameObject.AddComponent<AudioSource>();
@@ -28,6 +34,10 @@ namespace HomeCode
             _originalPos = buttonHolder.transform.position;
             buttonHolder.transform.position = _altPos;
             buttonHolder.SetActive(false);
+
+            //animation
+           clockAnimation = clock.GetComponent<Animator>();
+           clockAnimation.SetBool("clockStart", false);
         }
 
         void Update()
@@ -47,6 +57,9 @@ namespace HomeCode
             buttonHolder.SetActive(true);
             _timer = 0;
             _moveButtonHolder = true;
+
+            //Clock animation
+            //clockAnimation.SetBool("clockStart", false);
         }
 
         public void Click(int i)
@@ -54,6 +67,10 @@ namespace HomeCode
             GameManager.currentMaxStamina += energyIncrease;
             ChooseActivity(i, buttonHolder);
             //Disable all button pushing.
+
+            //Clock animation
+            clockAnimation.SetBool("clockStart", true);
+
         }
 
         void ChooseActivity(int i, GameObject obj = default(GameObject))
