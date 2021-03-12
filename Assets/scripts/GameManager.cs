@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
     public GameObject tryagain; // Is this used?
     public static bool running = false;
 
-    private player2D _playerScript;
+    private player2D playerScript;
     private PlayerStats _playerSliderStats;
+    public Player_walking playerWalking;
 
     #region Stat Variables
     public static float stamina;
@@ -42,17 +43,18 @@ public class GameManager : MonoBehaviour
     {
         if (FindObjectOfType<player2D>())
         {
-            _playerScript = FindObjectOfType<player2D>();
+            playerScript = FindObjectOfType<player2D>();
             running = true;
         }
         else if (FindObjectOfType<Player_walking>())
         {
+            playerWalking = FindObjectOfType<Player_walking>();
             running = false;
         }
         if (FindObjectOfType<PlayerStats>())
         {
             _playerSliderStats = FindObjectOfType<PlayerStats>();
-            if (running) _playerSliderStats.progressBarMax = _playerScript.endPos - _playerScript.transform.position.x;
+            if (running) _playerSliderStats.progressBarMax = playerScript.endPos - playerScript.transform.position.x;
         }
         stamina = currentMaxStamina;
         health = currentMaxHealth;
@@ -63,10 +65,10 @@ public class GameManager : MonoBehaviour
         if (running)
         {
             stamina -= Time.deltaTime;
-            _playerScript.stamina = stamina;
+            playerScript.stamina = stamina;
             _playerSliderStats.SetCurrentHealth(health);
             _playerSliderStats.SetCurrentStamina(stamina);
-            _playerSliderStats.progressBar = _playerScript.gameObject.transform.position.x - _playerScript.startPos;
+            _playerSliderStats.progressBar = playerScript.gameObject.transform.position.x - playerScript.startPos;
         }
         else
         {
@@ -103,7 +105,7 @@ public class GameManager : MonoBehaviour
         currentMaxStamina += 2;
         currentMaxHealth += 1;
         trips += 1;
-        SceneManager.LoadScene("blah");
+        SceneManager.LoadScene(0);
         CancelInvoke("mainmenu");
     }
 
