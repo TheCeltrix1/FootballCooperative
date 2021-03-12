@@ -580,7 +580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &577851398
 RectTransform:
   m_ObjectHideFlags: 0
@@ -949,7 +949,6 @@ GameObject:
   - component: {fileID: 629814125}
   - component: {fileID: 629814124}
   - component: {fileID: 629814126}
-  - component: {fileID: 629814127}
   m_Layer: 0
   m_Name: Holder
   m_TagString: ObjectHolder
@@ -1009,25 +1008,6 @@ MonoBehaviour:
   timerLength: 2
   clockAnimation: {fileID: 1315536099}
   clock: {fileID: 1315536096}
---- !u!95 &629814127
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629814123}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eb37428d0e878ce4ab4cb311a7b37dad, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &871274719
 PrefabInstance:
   m_ObjectHideFlags: 0
