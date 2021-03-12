@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
         currentMaxStamina += 2;
         currentMaxHealth += 1;
         trips += 1;
-        SceneManager.LoadScene("blah");
+        SceneManager.LoadScene(0);
         CancelInvoke("mainmenu");
     }
 
