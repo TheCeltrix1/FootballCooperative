@@ -1008,7 +1008,6 @@ MonoBehaviour:
   timerLength: 2
   clockAnimation: {fileID: 1315536099}
   clock: {fileID: 1315536096}
-  lc: {fileID: 882878034}
 --- !u!1001 &871274719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1418,8 +1417,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f9cb80776524e41aacc40d02cf76d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dark: {fileID: 0}
-  changecolour: 0
+  colour: {r: 0, g: 0, b: 0, a: 0.7490196}
+  colour2: {r: 0, g: 0, b: 0, a: 0.5019608}
+  threshold: 1
+  thresshold2: 2
+  thresshold3: 3
 --- !u!114 &882878035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,13 +1429,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882878032}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5176471}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.69803923}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2296,7 +2298,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1465711933}
   - component: {fileID: 1465711932}
-  - component: {fileID: 1465711934}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2379,20 +2380,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &1465711934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465711931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f9cb80776524e41aacc40d02cf76d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dark: {fileID: 0}
-  changecolour: 0
 --- !u!1 &1571370973
 GameObject:
   m_ObjectHideFlags: 0

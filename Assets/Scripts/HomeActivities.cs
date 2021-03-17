@@ -24,8 +24,7 @@ namespace HomeCode
         public Animator clockAnimation;
         public GameObject clock;
 
-        //light
-        public LightChange lc;
+   
         void Awake()
         {
             if (GetComponent<AudioSource>() == false) gameObject.AddComponent<AudioSource>();
@@ -72,8 +71,7 @@ namespace HomeCode
 
             //Clock animation
             clockAnimation.SetBool("clockStart", true);
-            // lgith activate
-            lc.changecolour = true;
+        
         }
 
         void ChooseActivity(int i, GameObject obj = default(GameObject))
