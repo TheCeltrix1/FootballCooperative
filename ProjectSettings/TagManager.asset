@@ -20,7 +20,7 @@ TagManager:
   - block
   - Shoes
   - frame
-  - 
+  - Lightless
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: front
     uniqueID: 1945775667
+    locked: 0
+  - name: No Lighting
+    uniqueID: 3240695611
     locked: 0
