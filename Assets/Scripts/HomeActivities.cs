@@ -18,8 +18,6 @@ namespace HomeCode
         private Vector3 _originalPos;
         private AudioSource _audioSource;
 
-
-
         //animation
         public Animator clockAnimation;
         public GameObject clock;
@@ -90,7 +88,11 @@ namespace HomeCode
 
         public void ResetActivitesBar(Transform trans)
         {
-            if (Vector3.Distance(trans.position, GameManager.instance.playerWalking.gameObject.transform.position) <= 30) ResetActivities();
+            if (Vector3.Distance(trans.position, GameManager.instance.playerWalking.gameObject.transform.position) <= 30)
+            {
+                ResetActivities();
+                trans.gameObject.SetActive(false);
+            }
         }
     }
 }
