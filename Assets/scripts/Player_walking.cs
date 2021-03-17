@@ -6,14 +6,19 @@ public class Player_walking : MonoBehaviour
 {
     public float movementspeed = 1;
     public bool facingRight = true;
+    public Canvas canvieBoi;
 
+    private float _pos;
+    private float _spriteSize;
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _playerAnimator;
+
     // Start is called before the first frame update
     void Awake()
     {
         if (GetComponent<Animator>()) _playerAnimator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteSize = _spriteRenderer.bounds.size.x;
     }
 
     // Update is called once per frame
@@ -21,14 +26,26 @@ public class Player_walking : MonoBehaviour
     {
         if (_playerAnimator != null)
         {
-            var movement = Input.GetAxis("Horizontal");
-            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementspeed;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -92.5f, 92.5f), transform.position.y, transform.position.z);
-
-            _playerAnimator.SetFloat("speed", Mathf.Abs(movement));
-
-            if (movement > 0) _spriteRenderer.flipX = false;
-            else if (movement < 0) _spriteRenderer.flipX = true;
+            Movement();
         }
+    }
+
+    private void Movement()
+    {
+        if (Input.GetMouseButtonDown(0)) _pos = MousePositionEqualHeight();
+        if (Vector2.Distance(new Vector2(_pos, 0), new Vector2(transform.localPosition.x, 0)) > 1f) _playerAnimator.SetFloat("speed", 0.8f);
+        else _playerAnimator.SetFloat("speed", 0);
+        if (_pos < transform.localPosition.x) _spriteRenderer.flipX = true;
+        else _spriteRenderer.flipX = false;
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(_pos, transform.localPosition.y, transform.localPosition.z), movementspeed * Time.deltaTime);
+        //transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -_spriteSize/2, _spriteSize/2), transform.localPosition.y, transform.localPosition.z);
+    }
+
+    private float MousePositionEqualHeight()
+    {
+        float scaledMousePos = (Input.mousePosition.x - (Screen.width / 2)) / Screen.width;
+        scaledMousePos = Mathf.Clamp(scaledMousePos, -0.5f, 0.5f);
+        scaledMousePos *= canvieBoi.GetComponent<RectTransform>().rect.width;
+        return scaledMousePos;
     }
 }

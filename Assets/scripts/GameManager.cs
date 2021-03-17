@@ -30,8 +30,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Scene sce = SceneManager.GetActiveScene();
         if (instance != null) Destroy(gameObject);
-        else
+        else if(sce.name != "Menu")
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -105,7 +106,7 @@ public class GameManager : MonoBehaviour
         currentMaxStamina += 2;
         currentMaxHealth += 1;
         trips += 1;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         CancelInvoke("mainmenu");
     }
 
