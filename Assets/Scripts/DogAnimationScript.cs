@@ -20,7 +20,7 @@ public class DogAnimationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Vector2.Distance(transform.position, playerTransform.position));
+        //Debug.Log(Vector2.Distance(transform.position, playerTransform.position));
         anim.SetBool("playerNear", CheckDistance(playerTransform, checkDistance));
     }
 
@@ -37,7 +37,7 @@ public class DogAnimationScript : MonoBehaviour
                 return false;
             }
         }
-        else;
+        else
         {
             return false;
         }
