@@ -109,11 +109,17 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
         CancelInvoke("mainmenu");
     }
+    void ending()
+    {
+        SceneManager.LoadScene(3);
+        CancelInvoke("ending");
+    }
 
     //I don't know what these do or if they are even used.
-    public void endgame()
+    public void endgame(float time)
     {
-        completelvlUI.SetActive(true);
+        //   completelvlUI.SetActive(true);
+        Invoke("ending", time);
     }
 
     public void endlevel()
