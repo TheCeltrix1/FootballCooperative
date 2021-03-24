@@ -93,6 +93,7 @@ public class player2D : MonoBehaviour
                     animationDelaytime = AnimatorNextClipLength(kickAnimationName);
 
                     //GAME COMPLETE SHENANIGANS
+                    GameManager.instance.endgame(animationDelaytime);
                     Debug.Log("endgame");
                 }
                 return;
