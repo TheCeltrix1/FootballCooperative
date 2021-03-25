@@ -5,23 +5,21 @@ using UnityEngine;
 public class DogAnimationScript : MonoBehaviour
 {
     [SerializeField]
-    private float checkDistance = 40.0f;
+    private float checkDistance = 80.0f;
 
-    private Animator anim;
-    private Transform playerTransform;
+    private Animator _anim;
+    public Transform playerTransform;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        anim = GetComponent<Animator>();
-        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        _anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Vector2.Distance(transform.position, playerTransform.position));
-        anim.SetBool("playerNear", CheckDistance(playerTransform, checkDistance));
+        _anim.SetBool("playerNear", CheckDistance(playerTransform, checkDistance));
     }
 
     bool CheckDistance(Transform _playerTransform, float _desiredDistance)

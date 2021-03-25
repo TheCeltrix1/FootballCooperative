@@ -19,11 +19,12 @@ public class player2D : MonoBehaviour
 
     public GameObject backgroundPlayer;
     private float _backgroundPlayerY;
+    private float _backgroundPlayerX;
 
     private float _ballTransitionSpeed = 0.25f;
     private float _ballTransitionStage;
-    private float _ballForegroundScale = 3;
-    private float _ballBackgroundScale = 1.5f;
+    private float _ballForegroundScale = 2f;
+    private float _ballBackgroundScale = ((float)(2f/3f) * 2f);
     private float _ballYPosition;
 
     private Vector2 _targetPosition;
@@ -63,6 +64,7 @@ public class player2D : MonoBehaviour
         _playerAnimator.SetBool("noStamina", false);
         _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
         _backgroundPlayerY = backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f;
+        _backgroundPlayerX = backgroundBallPosition.x - (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.x/3);
     }
 
     void Update()
@@ -118,13 +120,14 @@ public class player2D : MonoBehaviour
             }
             #endregion
         }
-        backgroundPlayer.transform.position = new Vector2(transform.position.x + backgroundBallPosition.x, _backgroundPlayerY);
+        backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
 
         #region Kick to background
         StartCoroutine("PassBall");
 
         #endregion
     }
+
     void Jump()
     {
         if (!_playerCollider.IsTouchingLayers(JumpLayer))
