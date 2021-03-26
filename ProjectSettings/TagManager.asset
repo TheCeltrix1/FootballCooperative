@@ -23,7 +23,7 @@ TagManager:
   - Lightless
   - foreground
   - midground
-  - 
+  - background
   - 
   - 
   - 
@@ -41,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: sky
+    uniqueID: 1770820873
+    locked: 0
+  - name: background
+    uniqueID: 2725732639
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -49,12 +55,6 @@ TagManager:
     locked: 0
   - name: No Lighting
     uniqueID: 3240695611
-    locked: 0
-  - name: sky
-    uniqueID: 1770820873
-    locked: 0
-  - name: background
-    uniqueID: 2725732639
     locked: 0
   - name: assetbackground
     uniqueID: 1819423511
