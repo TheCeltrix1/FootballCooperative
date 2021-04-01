@@ -671,7 +671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &577851398
 RectTransform:
   m_ObjectHideFlags: 0
@@ -949,6 +949,8 @@ MonoBehaviour:
   buttonHolder: {fileID: 933378659}
   energyIncrease: 0.25
   timerLength: 2
+  canpush: 0
+  walk: {fileID: 926017776}
   clockAnimation: {fileID: 1315536099}
   clock: {fileID: 1315536096}
 --- !u!1 &662610276
