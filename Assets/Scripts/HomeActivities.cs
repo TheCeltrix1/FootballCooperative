@@ -13,6 +13,8 @@ namespace HomeCode
         public float timerLength;
         private float _timer;
         private bool _moveButtonHolder;
+        public bool canpush;
+        public Player_walking walk;
 
         private Vector3 _altPos;
         private Vector3 _originalPos;
@@ -33,10 +35,11 @@ namespace HomeCode
             _originalPos = buttonHolder.transform.position;
             buttonHolder.transform.position = _altPos;
             buttonHolder.SetActive(false);
-
+         
             //animation
            clockAnimation = clock.GetComponent<Animator>();
            clockAnimation.SetBool("clockStart", false);
+          //  walk.movementspeed = 300;
         }
 
         void Update()
@@ -55,18 +58,24 @@ namespace HomeCode
             buttonHolder.transform.position = _altPos;
             buttonHolder.SetActive(true);
             _timer = 0;
+            canpush = true;
             _moveButtonHolder = true;
-
+            walk.movementspeed = 0;
             //Clock animation
             //clockAnimation.SetBool("clockStart", false);
         }
 
         public void Click(int i)
         {
+
+            if (canpush == false)
+                return;
             GameManager.currentMaxStamina += energyIncrease;
             ChooseActivity(i, buttonHolder);
             //Disable all button pushing.
-
+            canpush = false;
+            //disable player
+          
             //Clock animation
             clockAnimation.SetBool("clockStart", true);
         
@@ -80,6 +89,7 @@ namespace HomeCode
                 _audioSource.Play();
                 IEnumerator rou = FadInLoading.LoadTransition(audioClips[i].length, obj);
                 StartCoroutine(rou);
+              //  walk.movementspeed = 300;
             }
             else Debug.Log($"{i} is out of bounds");
         }
@@ -90,6 +100,7 @@ namespace HomeCode
             {
                 ResetActivities();
                 trans.gameObject.SetActive(false);
+             
             }
         }
     }

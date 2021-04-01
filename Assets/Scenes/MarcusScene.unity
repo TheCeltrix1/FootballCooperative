@@ -671,7 +671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &577851398
 RectTransform:
   m_ObjectHideFlags: 0
@@ -949,6 +949,8 @@ MonoBehaviour:
   buttonHolder: {fileID: 933378659}
   energyIncrease: 0.25
   timerLength: 2
+  canpush: 0
+  walk: {fileID: 926017776}
   clockAnimation: {fileID: 1315536099}
   clock: {fileID: 1315536096}
 --- !u!1 &662610276
@@ -1743,7 +1745,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_Sprite: {fileID: 8033567360755536794, guid: fdcd1885669cf6a49989c9c6df08decf,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2047,7 +2049,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1 &1205740368
 GameObject:
@@ -3582,7 +3584,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 7013879158672920550, guid: 854b57f43f687e84d9bd10b4319ab6b8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

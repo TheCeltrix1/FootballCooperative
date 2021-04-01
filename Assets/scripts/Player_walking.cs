@@ -33,7 +33,7 @@ public class Player_walking : MonoBehaviour
     private void Movement()
     {
         if (Input.GetMouseButtonDown(0)) _pos = MousePositionEqualHeight();
-        if (Vector2.Distance(new Vector2(_pos, 0), new Vector2(transform.localPosition.x, 0)) > 1f) _playerAnimator.SetFloat("speed", 0.8f);
+        if (Vector2.Distance(new Vector2(_pos, 0), new Vector2(transform.localPosition.x, 0)) > 1f && movementspeed != 0) _playerAnimator.SetFloat("speed", 0.8f);
         else _playerAnimator.SetFloat("speed", 0);
         if (_pos < transform.localPosition.x) _spriteRenderer.flipX = true;
         else _spriteRenderer.flipX = false;
