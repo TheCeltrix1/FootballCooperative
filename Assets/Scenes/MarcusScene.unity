@@ -553,6 +553,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1279761256094393503, guid: 1c9eb03a937b6c04999cfb5899380a56,
+        type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 926017778}
+    - target: {fileID: 1279761256094393503, guid: 1c9eb03a937b6c04999cfb5899380a56,
+        type: 3}
+      propertyPath: panting
+      value: 
+      objectReference: {fileID: 525067610}
+    - target: {fileID: 1279761256094393503, guid: 1c9eb03a937b6c04999cfb5899380a56,
+        type: 3}
+      propertyPath: checkDistance
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c9eb03a937b6c04999cfb5899380a56, type: 3}
 --- !u!1 &455889471
@@ -767,11 +782,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9f20fb76f126a6f4bb9d1e46b8ceb671, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_audioClip: {fileID: 8300000, guid: 4fc112ae17455a04891ff7f1814cd706, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.2
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
