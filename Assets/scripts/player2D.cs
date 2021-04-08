@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player2D : MonoBehaviour
 {
+    [Header("Misc Vars")]
     public float speed = 3.0f;
     public float jump = 20.0f;
     public LayerMask JumpLayer;
@@ -12,6 +13,7 @@ public class player2D : MonoBehaviour
     public bool canPlay = true;
 
     //Second Player Character code
+    [Header("BG Player")]
     public bool jumping = false;
     public GameObject currentBallPosition;
     public Vector3 backgroundBallPosition = new Vector3(3, 3, 0);
@@ -20,6 +22,7 @@ public class player2D : MonoBehaviour
     public GameObject backgroundPlayer;
     private float _backgroundPlayerY;
     private float _backgroundPlayerX;
+    private bool _kickSFXBool;
 
     private float _ballTransitionSpeed = 0.25f;
     private float _ballTransitionStage;
@@ -32,16 +35,31 @@ public class player2D : MonoBehaviour
     private Rigidbody2D _playerRigidbody;
     private bool _endAnimation = false;
 
+    [Header("Animations")]
     public string breathingAnimationName;
     public string kickAnimationName;
+    public string hitInFaceAnimationName;
     public string fallAnimationName;
+    private bool _endAnimationRandomBool = false;
     private float _playerSlowdownTime = .5f;
     private float _playerSlowdownTimer;
     private Animator _playerAnimator;
     private float animationDelaytime;
     private RuntimeAnimatorController _animatorRTC;
 
-    #region statistics
+    //Audio Vars
+    [Header("AudioSFX sources")]
+    public AudioSource jumpSFX;
+    public AudioSource kickSFX;
+    public AudioSource landSFX;
+    public AudioSource facePlantSFX;
+    public AudioSource finalKickSFX;
+    public AudioSource deepBreathsSFX;
+    public AudioSource faceHitSFX;
+    public AudioSource runningSFX;
+
+    #region Statistics
+    [Header("Statistics")]
     public float stamina;
     private float _totalMaxStamina;
     private float _currentMaxStamina;
@@ -76,10 +94,22 @@ public class player2D : MonoBehaviour
                 if (_playerCollider.IsTouchingLayers(JumpLayer))
                 {
                     _endAnimation = true;
+                    deepBreathsSFX.Play();
                     StartCoroutine("StopMoving");
+                    _endAnimationRandomBool = (Random.Range(0,2) == 1);
+                    _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
                     _playerAnimator.SetBool("noStamina", true);
-                    _playerAnimator.SetBool("maxStamina", true);
-                    animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
+                    _playerAnimator.SetBool("maxStamina", false);
+                    if (_endAnimationRandomBool) 
+                    {
+                        animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
+                        if (!deepBreathsSFX.isPlaying) deepBreathsSFX.Play();
+                    }
+                    else
+                    {
+                        animationDelaytime = AnimatorNextClipLength(hitInFaceAnimationName);
+                        if (!faceHitSFX.isPlaying) faceHitSFX.Play();
+                    }
                     GameManager.instance.gohome(animationDelaytime);
                 }
                 return;
@@ -89,6 +119,7 @@ public class player2D : MonoBehaviour
                 if (_playerCollider.IsTouchingLayers(JumpLayer))
                 {
                     _endAnimation = true;
+                    finalKickSFX.Play();
                     StartCoroutine("StopMoving");
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", true);
@@ -101,12 +132,15 @@ public class player2D : MonoBehaviour
                 return;
             }
             #endregion
+            if (stamina <= 0) runningSFX.Stop();
+
             transform.localRotation = Quaternion.Euler(0, 0, 0);
             if (!_endAnimation) _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
 
             //Animation
             _playerAnimator.SetFloat("speed", speed);
             _playerAnimator.SetBool("isGrounded", _playerCollider.IsTouchingLayers(JumpLayer));
+
             #region Movement
             if (Input.GetMouseButtonDown(0))
             {
@@ -124,7 +158,6 @@ public class player2D : MonoBehaviour
 
         #region Kick to background
         StartCoroutine("PassBall");
-
         #endregion
     }
 
@@ -132,9 +165,13 @@ public class player2D : MonoBehaviour
     {
         if (!_playerCollider.IsTouchingLayers(JumpLayer))
         {
+            runningSFX.Stop();
             return;
         }
         Vector2 jumpVelocityToAdd = new Vector2(0f, jump);
+        if (!jumpSFX.isPlaying) jumpSFX.Play();
+        if (!kickSFX.isPlaying) kickSFX.Play();
+        if (!runningSFX.isPlaying) runningSFX.Play();
         _playerRigidbody.velocity += jumpVelocityToAdd;
 
     }
@@ -168,11 +205,18 @@ public class player2D : MonoBehaviour
         {
             _targetPosition = backgroundBallPosition;
             _ballTransitionStage += Time.deltaTime;
+            _kickSFXBool = true;
         }
         else
         {
+            if (!kickSFX.isPlaying && _kickSFXBool) 
+            { 
+                kickSFX.Play();
+                landSFX.Play();
+            }
             _targetPosition = foregroundBallPosition;
             _ballTransitionStage -= Time.deltaTime;
+            _kickSFXBool = false;
         }
         _ballTransitionStage = Mathf.Clamp(_ballTransitionStage,0,_ballTransitionSpeed);
         currentBallPosition.transform.position = new Vector2(transform.position.x, _ballYPosition) + Vector2.Lerp(foregroundBallPosition, backgroundBallPosition, _ballTransitionStage / _ballTransitionSpeed);
@@ -186,11 +230,13 @@ public class player2D : MonoBehaviour
     {
         if (collision.collider.tag == "block")
         {
-            Debug.Log("hit");
             canPlay = false;
 
+            runningSFX.Stop();
+            _playerAnimator.SetBool("death", true);
+            facePlantSFX.Play();
             animationDelaytime = AnimatorNextClipLength(fallAnimationName);
-            GameManager.instance.death(animationDelaytime * 2);
+            GameManager.instance.death(animationDelaytime * 10);
         }
     }
 }
