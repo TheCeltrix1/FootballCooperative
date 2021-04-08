@@ -56,6 +56,7 @@ public class player2D : MonoBehaviour
     public AudioSource finalKickSFX;
     public AudioSource deepBreathsSFX;
     public AudioSource faceHitSFX;
+    public AudioSource runningSFX;
 
     #region Statistics
     [Header("Statistics")]
@@ -95,10 +96,10 @@ public class player2D : MonoBehaviour
                     _endAnimation = true;
                     deepBreathsSFX.Play();
                     StartCoroutine("StopMoving");
-                    _endAnimationRandomBool = (Random.Range(0,1) == 1);
+                    _endAnimationRandomBool = (Random.Range(0,2) == 1);
                     _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
                     _playerAnimator.SetBool("noStamina", true);
-                    _playerAnimator.SetBool("maxStamina", true);
+                    _playerAnimator.SetBool("maxStamina", false);
                     if (_endAnimationRandomBool) 
                     {
                         animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
@@ -131,12 +132,15 @@ public class player2D : MonoBehaviour
                 return;
             }
             #endregion
+            if (stamina <= 0) runningSFX.Stop();
+
             transform.localRotation = Quaternion.Euler(0, 0, 0);
             if (!_endAnimation) _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
 
             //Animation
             _playerAnimator.SetFloat("speed", speed);
             _playerAnimator.SetBool("isGrounded", _playerCollider.IsTouchingLayers(JumpLayer));
+
             #region Movement
             if (Input.GetMouseButtonDown(0))
             {
@@ -154,7 +158,6 @@ public class player2D : MonoBehaviour
 
         #region Kick to background
         StartCoroutine("PassBall");
-
         #endregion
     }
 
@@ -162,11 +165,13 @@ public class player2D : MonoBehaviour
     {
         if (!_playerCollider.IsTouchingLayers(JumpLayer))
         {
+            runningSFX.Stop();
             return;
         }
         Vector2 jumpVelocityToAdd = new Vector2(0f, jump);
         if (!jumpSFX.isPlaying) jumpSFX.Play();
         if (!kickSFX.isPlaying) kickSFX.Play();
+        if (!runningSFX.isPlaying) runningSFX.Play();
         _playerRigidbody.velocity += jumpVelocityToAdd;
 
     }
@@ -225,13 +230,13 @@ public class player2D : MonoBehaviour
     {
         if (collision.collider.tag == "block")
         {
-            Debug.Log("hit");
             canPlay = false;
 
+            runningSFX.Stop();
             _playerAnimator.SetBool("death", true);
             facePlantSFX.Play();
             animationDelaytime = AnimatorNextClipLength(fallAnimationName);
-            GameManager.instance.death(animationDelaytime * 2);
+            GameManager.instance.death(animationDelaytime * 10);
         }
     }
 }
