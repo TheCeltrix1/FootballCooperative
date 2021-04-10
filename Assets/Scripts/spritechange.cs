@@ -8,7 +8,7 @@ public class spritechange : MonoBehaviour
     //  public Sprite completed;
     // Start is called before the first frame update
     private Animator ani;
-    
+   
     void Start()
     {
         //  render = GetComponent<SpriteRenderer>();
@@ -26,6 +26,7 @@ public class spritechange : MonoBehaviour
         if(collision.tag == "Player")
         {
             ani.SetBool("start", true);
+           
         }
     }
    
