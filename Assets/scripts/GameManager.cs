@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
     void ending()
     {
         SceneManager.LoadScene(3);
+        running = false;
         CancelInvoke("ending");
     }
 
