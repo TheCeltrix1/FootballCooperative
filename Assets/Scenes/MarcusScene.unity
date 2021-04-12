@@ -1418,6 +1418,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1272235284}
     m_Modifications:
+    - target: {fileID: 2075469818074705843, guid: 1906355bc59d21248bb2f41762feea4f,
+        type: 3}
+      propertyPath: numberOfOptions
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2730974182003906315, guid: 1906355bc59d21248bb2f41762feea4f,
         type: 3}
       propertyPath: m_FontData.m_FontSize
