@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class player2D : MonoBehaviour
 {
+    #region Variables
     [Header("Misc Vars")]
     public float speed = 3.0f;
     public float jump = 20.0f;
@@ -66,6 +67,8 @@ public class player2D : MonoBehaviour
     public float stamina;
     private float _totalMaxStamina;
     private float _currentMaxStamina;
+    #endregion
+
     #endregion
 
     void Awake()
