@@ -30,7 +30,7 @@ public class player2D : MonoBehaviour
     private float _ballBackgroundScale = ((float)(2f/3f) * 2f);
     private float _ballYPosition;
     public bool ballMove = true;
-    private float _speedScore = 10;
+    private float _speedScore = 50;
     public Transform goal;
 
     private Vector2 _targetPosition;
@@ -128,6 +128,7 @@ public class player2D : MonoBehaviour
                     _playerAnimator.SetBool("maxStamina", true);
                     animationDelaytime = AnimatorNextClipLength(kickAnimationName);
 
+                    ballMove = false;
                     currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
                     //GAME COMPLETE SHENANIGANS
                     GameManager.instance.endgame(animationDelaytime);
