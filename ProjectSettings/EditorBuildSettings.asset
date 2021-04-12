@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/blah.unity
     guid: 5f44a266473791e479e9bba50c065198
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: c6a793f00fa29074ab91a124d3d62535
   m_configObjects: {}
