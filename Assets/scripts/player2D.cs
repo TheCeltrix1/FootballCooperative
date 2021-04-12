@@ -28,7 +28,7 @@ public class player2D : MonoBehaviour
     private float _ballTransitionSpeed = 0.25f;
     private float _ballTransitionStage;
     private float _ballForegroundScale = 2f;
-    private float _ballBackgroundScale = ((float)(2f/3f) * 2f);
+    private float _ballBackgroundScale = ((float)(2f / 3f) * 2f);
     private float _ballYPosition;
     public bool ballMove = true;
     private float _speedScore = 50;
@@ -45,7 +45,7 @@ public class player2D : MonoBehaviour
     public string hitInFaceAnimationName;
     public string fallAnimationName;
     private bool _endAnimationRandomBool = false;
-    private float _playerSlowdownTime = .5f;
+    private float _playerSlowdownTime = 0.5f;
     private float _playerSlowdownTimer;
     private Animator _playerAnimator;
     private float animationDelaytime;
@@ -88,12 +88,13 @@ public class player2D : MonoBehaviour
         _playerAnimator.SetBool("noStamina", false);
         _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
         _backgroundPlayerY = backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f;
-        _backgroundPlayerX = backgroundBallPosition.x - (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.x/3);
+        _backgroundPlayerX = backgroundBallPosition.x - (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.x / 3);
     }
 
     void Update()
     {
-        if (canPlay) {
+        if (canPlay)
+        {
             #region Stamina Management
             if (stamina <= 0 && _currentMaxStamina < _totalMaxStamina && !_endAnimation)
             {
@@ -101,12 +102,11 @@ public class player2D : MonoBehaviour
                 {
                     _endAnimation = true;
                     deepBreathsSFX.Play();
-                    StartCoroutine("StopMoving");
-                    _endAnimationRandomBool = (Random.Range(0,2) == 1);
+                    _endAnimationRandomBool = (Random.Range(0, 2) == 1);
                     _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", false);
-                    if (_endAnimationRandomBool) 
+                    if (_endAnimationRandomBool)
                     {
                         animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
                         if (!deepBreathsSFX.isPlaying) deepBreathsSFX.Play();
@@ -126,7 +126,6 @@ public class player2D : MonoBehaviour
                 {
                     _endAnimation = true;
                     finalKickSFX.Play();
-                    StartCoroutine("StopMoving");
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", true);
                     animationDelaytime = AnimatorNextClipLength(kickAnimationName);
@@ -143,7 +142,19 @@ public class player2D : MonoBehaviour
             if (stamina <= 0) runningSFX.Stop();
 
             transform.localRotation = Quaternion.Euler(0, 0, 0);
-            if (!_endAnimation) _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
+
+            #region GameEnd
+            if (!_endAnimation)
+            {
+                backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
+                _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
+            }
+            else
+            {
+                backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
+                StartCoroutine("StopMoving");
+            }
+            #endregion
 
             //Animation
             _playerAnimator.SetFloat("speed", speed);
@@ -162,7 +173,7 @@ public class player2D : MonoBehaviour
             }
             #endregion
         }
-        backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
+        
 
         #region Kick to background
         if (ballMove)
@@ -204,7 +215,7 @@ public class player2D : MonoBehaviour
     #region Coroutines
     private IEnumerator StopMoving()
     {
-        _playerRigidbody.velocity = new Vector2(Mathf.Lerp(speed,0, 1 - (_playerSlowdownTimer / _playerSlowdownTime)), _playerRigidbody.velocity.y);
+        _playerRigidbody.velocity = new Vector2(Mathf.Lerp(speed, 0, 1 - (_playerSlowdownTimer / _playerSlowdownTime)), _playerRigidbody.velocity.y);
         _playerSlowdownTimer -= Time.deltaTime;
         if (_playerRigidbody.velocity.magnitude == 0) StopCoroutine("StopMoving");
         yield return null;
@@ -220,8 +231,8 @@ public class player2D : MonoBehaviour
         }
         else
         {
-            if (!kickSFX.isPlaying && _kickSFXBool) 
-            { 
+            if (!kickSFX.isPlaying && _kickSFXBool)
+            {
                 kickSFX.Play();
                 landSFX.Play();
             }
@@ -229,10 +240,10 @@ public class player2D : MonoBehaviour
             _ballTransitionStage -= Time.deltaTime;
             _kickSFXBool = false;
         }
-        _ballTransitionStage = Mathf.Clamp(_ballTransitionStage,0,_ballTransitionSpeed);
+        _ballTransitionStage = Mathf.Clamp(_ballTransitionStage, 0, _ballTransitionSpeed);
         currentBallPosition.transform.position = new Vector2(transform.position.x, _ballYPosition) + Vector2.Lerp(foregroundBallPosition, backgroundBallPosition, _ballTransitionStage / _ballTransitionSpeed);
         float scale = Mathf.Lerp(_ballForegroundScale, _ballBackgroundScale, _ballTransitionStage / _ballTransitionSpeed);
-        currentBallPosition.transform.localScale = new Vector3(scale,scale,scale);
+        currentBallPosition.transform.localScale = new Vector3(scale, scale, scale);
         yield return null;
     }
     #endregion
