@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class spritechange : MonoBehaviour
 {
-    public SpriteRenderer render;
-    public Sprite completed;
+    // public SpriteRenderer render;
+    //  public Sprite completed;
     // Start is called before the first frame update
+    private Animator ani;
+    private SpriteRenderer cone;
+   
     void Start()
     {
-        render = GetComponent<SpriteRenderer>(); 
+        //  render = GetComponent<SpriteRenderer>();
+        ani = GetComponentInChildren<Animator>();
+        cone = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -21,12 +26,8 @@ public class spritechange : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-         //   Color tmp = render.color;
-           // tmp.a = 0f;
-            render.sprite = completed;
-         //   render.color = tmp;
-           // render.color += 1;
-           // commented out code is me trying to make the aplha go to zero and incrase to make a fade in effect
+            ani.SetBool("start", true);
+            cone.enabled = false;
         }
     }
    
