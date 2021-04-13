@@ -28,6 +28,7 @@ public class spritechange : MonoBehaviour
         {
             ani.SetBool("start", true);
             cone.enabled = false;
+            Debug.Log("wrong");
         }
     }
    
