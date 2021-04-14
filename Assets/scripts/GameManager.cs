@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         Scene sce = SceneManager.GetActiveScene();
         if (instance != null && instance != this) Destroy(gameObject);
-        else if(sce.name != "Menu")
+        else if (sce.name != "Menu")
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        stamina = Mathf.Clamp(stamina, 0, maxenergy);
         if (running)
         {
             stamina -= Time.deltaTime;
