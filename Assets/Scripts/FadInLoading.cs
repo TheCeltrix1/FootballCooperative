@@ -9,6 +9,7 @@ public class FadInLoading : MonoBehaviour
     public Image fadIn;
     public static Image fadInStatic;
     public Image fadInWeel;
+    public Text Text;
     public bool loaded = false;
     public static Player_walking move;
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class FadInLoading : MonoBehaviour
     {
         fadIn.canvasRenderer.SetAlpha(0f);
         fadInWeel.canvasRenderer.SetAlpha(0f);
+        Text.canvasRenderer.SetAlpha(0f);
         fadInStatic = fadIn;
         move = FindObjectOfType<Player_walking>();
     }
@@ -34,6 +36,7 @@ public class FadInLoading : MonoBehaviour
         {
             fadIn.CrossFadeAlpha(1, 2, false);
             fadInWeel.CrossFadeAlpha(1, 2, false);
+            Text.CrossFadeAlpha(1, 2, false);
             loaded = true;
         }
     }

@@ -32,7 +32,7 @@ public class player2D : MonoBehaviour
     private float _ballBackgroundScale = ((float)(2f / 3f) * 2f);
     private float _ballYPosition;
     public bool ballMove = true;
-    private float _speedScore = 100;
+    private float _speedScore = 80f;
     public Transform goal;
 
     private Vector2 _targetPosition;
@@ -136,9 +136,9 @@ public class player2D : MonoBehaviour
                     _animationDelaytime = AnimatorNextClipLength(kickAnimationName);
 
                     ballMove = false;
-                    currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
+                    
                     //GAME COMPLETE SHENANIGANS
-                    GameManager.instance.endgame(3f);
+                    GameManager.instance.endgame(5f);
                     Debug.Log("endgame");
                 }
                 return;
@@ -183,8 +183,10 @@ public class player2D : MonoBehaviour
         #region Kick to background
         if (ballMove)
         {
+            Debug.Log("Hello world");
             StartCoroutine("PassBall");
         }
+        else currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
         #endregion
     }
 
