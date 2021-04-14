@@ -104,7 +104,7 @@ public class player2D : MonoBehaviour
                 {
                     _endAnimation = true;
                     deepBreathsSFX.Play();
-                    _endAnimationRandomBool = (Random.Range(0, 1) == 1);
+                    _endAnimationRandomBool = (Random.Range(0, 2) == 1);
                     _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", false);
