@@ -95,6 +95,7 @@ public class player2D : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(stamina);
         if (canPlay)
         {
             #region Stamina Management
