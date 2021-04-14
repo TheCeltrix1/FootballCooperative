@@ -84012,6 +84012,11 @@ PrefabInstance:
       propertyPath: goal
       value: 
       objectReference: {fileID: 1152060097}
+    - target: {fileID: 652116010345850279, guid: 04498dc5eb90e544ca6e494306ca7fce,
+        type: 3}
+      propertyPath: faceBallHit
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 652116010345850284, guid: 04498dc5eb90e544ca6e494306ca7fce,
         type: 3}
       propertyPath: m_Name
@@ -84021,6 +84026,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652116010345850284, guid: 04498dc5eb90e544ca6e494306ca7fce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04498dc5eb90e544ca6e494306ca7fce, type: 3}

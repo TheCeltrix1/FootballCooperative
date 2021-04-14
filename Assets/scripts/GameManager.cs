@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
             playerWalking = FindObjectOfType<Player_walking>();
             running = false;
         }
+        else running = false;
         if (FindObjectOfType<PlayerStats>())
         {
             _playerSliderStats = FindObjectOfType<PlayerStats>();
