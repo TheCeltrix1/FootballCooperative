@@ -25,6 +25,7 @@ public class player2D : MonoBehaviour
     private float _backgroundPlayerX;
     private bool _kickSFXBool;
 
+    public GameObject faceBallHit;
     private float _ballTransitionSpeed = 0.25f;
     private float _ballTransitionStage;
     private float _ballForegroundScale = 2f;
@@ -44,11 +45,12 @@ public class player2D : MonoBehaviour
     public string kickAnimationName;
     public string hitInFaceAnimationName;
     public string fallAnimationName;
+    public float animationDelayTimeMultiplyer = 3;
     private bool _endAnimationRandomBool = false;
     private float _playerSlowdownTime = 0.5f;
     private float _playerSlowdownTimer;
+    private float _animationDelaytime;
     private Animator _playerAnimator;
-    private float animationDelaytime;
     private RuntimeAnimatorController _animatorRTC;
 
     //Audio Vars
@@ -102,21 +104,23 @@ public class player2D : MonoBehaviour
                 {
                     _endAnimation = true;
                     deepBreathsSFX.Play();
-                    _endAnimationRandomBool = (Random.Range(0, 2) == 1);
+                    _endAnimationRandomBool = (Random.Range(0, 1) == 1);
                     _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", false);
                     if (_endAnimationRandomBool)
                     {
-                        animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
+                        _animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
                         if (!deepBreathsSFX.isPlaying) deepBreathsSFX.Play();
                     }
                     else
                     {
-                        animationDelaytime = AnimatorNextClipLength(hitInFaceAnimationName);
+                        _animationDelaytime = AnimatorNextClipLength(hitInFaceAnimationName);
                         if (!faceHitSFX.isPlaying) faceHitSFX.Play();
+                        faceBallHit.GetComponent<BallHitPlayer>().playerFacePosition = transform;
+                        faceBallHit.GetComponent<BallHitPlayer>().StartCoroutine("HitPlayerInTheFace");
                     }
-                    GameManager.instance.gohome(animationDelaytime);
+                    GameManager.instance.gohome(_animationDelaytime * _animationDelaytime);
                 }
                 return;
             }
@@ -128,7 +132,7 @@ public class player2D : MonoBehaviour
                     finalKickSFX.Play();
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", true);
-                    animationDelaytime = AnimatorNextClipLength(kickAnimationName);
+                    _animationDelaytime = AnimatorNextClipLength(kickAnimationName);
 
                     ballMove = false;
                     
@@ -259,8 +263,8 @@ public class player2D : MonoBehaviour
             runningSFX.Stop();
             _playerAnimator.SetBool("death", true);
             facePlantSFX.Play();
-            animationDelaytime = AnimatorNextClipLength(fallAnimationName);
-            GameManager.instance.death(animationDelaytime * 10);
+            _animationDelaytime = AnimatorNextClipLength(fallAnimationName);
+            GameManager.instance.death(_animationDelaytime * animationDelayTimeMultiplyer);
         }
     }
 }

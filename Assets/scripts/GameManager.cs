@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Scene sce = SceneManager.GetActiveScene();
-        if (instance != null) Destroy(gameObject);
+        if (instance != null && instance != this) Destroy(gameObject);
         else if(sce.name != "Menu")
         {
             instance = this;
@@ -51,6 +51,12 @@ public class GameManager : MonoBehaviour
         {
             playerWalking = FindObjectOfType<Player_walking>();
             running = false;
+        }
+        else
+        {
+            running = false;
+            PlayerStats TomHasBigPP = instance.GetComponent<PlayerStats>();
+            if (TomHasBigPP) TomHasBigPP.enabled = false;
         }
         if (FindObjectOfType<PlayerStats>())
         {
