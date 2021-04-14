@@ -32,7 +32,7 @@ public class player2D : MonoBehaviour
     private float _ballBackgroundScale = ((float)(2f / 3f) * 2f);
     private float _ballYPosition;
     public bool ballMove = true;
-    private float _speedScore = 50;
+    private float _speedScore = 100;
     public Transform goal;
 
     private Vector2 _targetPosition;
@@ -137,7 +137,7 @@ public class player2D : MonoBehaviour
                     ballMove = false;
                     currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
                     //GAME COMPLETE SHENANIGANS
-                    GameManager.instance.endgame(_animationDelaytime * animationDelayTimeMultiplyer);
+                    GameManager.instance.endgame(3f);
                     Debug.Log("endgame");
                 }
                 return;
