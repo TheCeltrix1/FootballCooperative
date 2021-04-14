@@ -89,13 +89,12 @@ public class player2D : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
         _playerAnimator.SetBool("noStamina", false);
         _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        _backgroundPlayerY = backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f;
+        _backgroundPlayerY = (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f) + (backgroundBallPosition.y / 2);
         _backgroundPlayerX = backgroundBallPosition.x - (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.x / 3);
     }
 
     void Update()
     {
-        Debug.Log(stamina);
         if (canPlay)
         {
             #region Stamina Management
@@ -105,7 +104,7 @@ public class player2D : MonoBehaviour
                 {
                     _endAnimation = true;
                     deepBreathsSFX.Play();
-                    _endAnimationRandomBool = (Random.Range(0, 1) == 1);
+                    _endAnimationRandomBool = (Random.Range(0, 2) == 1);
                     _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", false);
@@ -136,7 +135,7 @@ public class player2D : MonoBehaviour
                     _animationDelaytime = AnimatorNextClipLength(kickAnimationName);
 
                     ballMove = false;
-                    
+
                     //GAME COMPLETE SHENANIGANS
                     GameManager.instance.endgame(5f);
                     Debug.Log("endgame");
@@ -151,7 +150,6 @@ public class player2D : MonoBehaviour
             #region GameEnd
             if (!_endAnimation)
             {
-                backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
                 _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
             }
             else
@@ -178,16 +176,17 @@ public class player2D : MonoBehaviour
             }
             #endregion
         }
-        
+
 
         #region Kick to background
         if (ballMove)
         {
-            Debug.Log("Hello world");
             StartCoroutine("PassBall");
         }
         else currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
         #endregion
+
+        backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
     }
 
     void Jump()
@@ -262,6 +261,7 @@ public class player2D : MonoBehaviour
             canPlay = false;
 
             runningSFX.Stop();
+            backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
             _playerAnimator.SetBool("death", true);
             facePlantSFX.Play();
             _animationDelaytime = AnimatorNextClipLength(fallAnimationName);
