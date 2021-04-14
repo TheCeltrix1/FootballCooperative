@@ -104,22 +104,22 @@ public class player2D : MonoBehaviour
                 {
                     _endAnimation = true;
                     deepBreathsSFX.Play();
-                    _endAnimationRandomBool = (Random.Range(0, 2) == 1);
+                    _endAnimationRandomBool = (Random.Range(0, 1) == 1);
                     _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", false);
-                    /*if (_endAnimationRandomBool)
+                    if (_endAnimationRandomBool)
                     {
                         _animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
                         if (!deepBreathsSFX.isPlaying) deepBreathsSFX.Play();
                     }
                     else
-                    {*/
+                    {
                         _animationDelaytime = AnimatorNextClipLength(hitInFaceAnimationName);
                         if (!faceHitSFX.isPlaying) faceHitSFX.Play();
                         faceBallHit.GetComponent<BallHitPlayer>().playerFacePosition = transform;
                         faceBallHit.GetComponent<BallHitPlayer>().StartCoroutine("HitPlayerInTheFace");
-                    //}
+                    }
                     GameManager.instance.gohome(_animationDelaytime * _animationDelaytime);
                 }
                 return;
