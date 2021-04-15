@@ -27053,9 +27053,10 @@ GameObject:
   m_Component:
   - component: {fileID: 303961496}
   - component: {fileID: 303961497}
+  - component: {fileID: 303961498}
   m_Layer: 0
   m_Name: goalie_sport
-  m_TagString: Untagged
+  m_TagString: Goalie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27124,6 +27125,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &303961498
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303961495}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 54e18b7c67bb9694796953715f90c6df, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &304818302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27581,7 +27601,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 518a4ba69b3ca0e43958316ccbbdbb1e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -94739,6 +94759,11 @@ PrefabInstance:
       propertyPath: faceBallHit
       value: 
       objectReference: {fileID: 965597361}
+    - target: {fileID: 652116010345850279, guid: 04498dc5eb90e544ca6e494306ca7fce,
+        type: 3}
+      propertyPath: goalieAnimator
+      value: 
+      objectReference: {fileID: 303961498}
     - target: {fileID: 652116010345850284, guid: 04498dc5eb90e544ca6e494306ca7fce,
         type: 3}
       propertyPath: m_Name

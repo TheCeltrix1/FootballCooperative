@@ -7,6 +7,7 @@ TagManager:
   - block
   - manager
   - ObjectHolder
+  - Goalie
   layers:
   - Default
   - TransparentFX
