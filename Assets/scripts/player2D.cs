@@ -46,6 +46,7 @@ public class player2D : MonoBehaviour
     public string hitInFaceAnimationName;
     public string fallAnimationName;
     public float animationDelayTimeMultiplyer = 3;
+    public Animator goalieAnimator;
     private bool _endAnimationRandomBool = false;
     private float _playerSlowdownTime = 0.5f;
     private float _playerSlowdownTimer;
@@ -133,6 +134,7 @@ public class player2D : MonoBehaviour
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", true);
                     _animationDelaytime = AnimatorNextClipLength(kickAnimationName);
+                    goalieAnimator.SetTrigger("Jump");
 
                     ballMove = false;
 

@@ -27056,7 +27056,7 @@ GameObject:
   - component: {fileID: 303961498}
   m_Layer: 0
   m_Name: goalie_sport
-  m_TagString: Untagged
+  m_TagString: Goalie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94759,6 +94759,11 @@ PrefabInstance:
       propertyPath: faceBallHit
       value: 
       objectReference: {fileID: 965597361}
+    - target: {fileID: 652116010345850279, guid: 04498dc5eb90e544ca6e494306ca7fce,
+        type: 3}
+      propertyPath: goalieAnimator
+      value: 
+      objectReference: {fileID: 303961498}
     - target: {fileID: 652116010345850284, guid: 04498dc5eb90e544ca6e494306ca7fce,
         type: 3}
       propertyPath: m_Name
