@@ -55,8 +55,8 @@ public class GameManager : MonoBehaviour
         else
         {
             running = false;
-            PlayerStats TomHasBigPP = instance.GetComponent<PlayerStats>();
-            if (TomHasBigPP) TomHasBigPP.enabled = false;
+            PlayerStats tomHasBigPP = instance.GetComponent<PlayerStats>();
+            if (tomHasBigPP) tomHasBigPP.enabled = false;
         }
         if (FindObjectOfType<PlayerStats>())
         {
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void death(float deathDelay)
     {
-        Debug.Log("death");
+        //Debug.Log("death");
         if (gameover == false)
         {
             //   gameover = true;
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     void mainmenu()
     {
-        Debug.Log("loading");
+        //Debug.Log("loading");
         currentMaxStamina += 2;
         currentMaxHealth += 1;
         trips += 1;

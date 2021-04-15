@@ -23,6 +23,7 @@ public class player2D : MonoBehaviour
     public GameObject backgroundPlayer;
     private float _backgroundPlayerY;
     private float _backgroundPlayerX;
+    private float _backgroundPlayerFinalX;
     private bool _kickSFXBool;
 
     public GameObject faceBallHit;
@@ -177,8 +178,9 @@ public class player2D : MonoBehaviour
                 jumping = false;
             }
             #endregion
+            backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
         }
-
+        else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX /*+ _backgroundPlayerX*/, _backgroundPlayerY);
 
         #region Kick to background
         if (ballMove)
@@ -188,7 +190,6 @@ public class player2D : MonoBehaviour
         else currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
         #endregion
 
-        backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
     }
 
     void Jump()
@@ -262,6 +263,7 @@ public class player2D : MonoBehaviour
         {
             canPlay = false;
 
+            _backgroundPlayerFinalX = backgroundPlayer.transform.position.x;
             runningSFX.Stop();
             backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
             _playerAnimator.SetBool("death", true);
