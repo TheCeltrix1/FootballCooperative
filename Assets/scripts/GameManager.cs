@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public static float health;
     public static float maxhealth = 10;
     public static float currentMaxHealth = 5;
+    
     #endregion
 
     private void Awake()
