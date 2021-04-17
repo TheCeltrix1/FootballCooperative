@@ -83572,9 +83572,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1327732930}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
---- !u!1001 &1329124300
-=======
 --- !u!1 &1140867503
 GameObject:
   m_ObjectHideFlags: 0
@@ -83709,7 +83706,6 @@ CanvasRenderer:
   m_GameObject: {fileID: 1140867503}
   m_CullTransparentMesh: 0
 --- !u!1001 &1147355948
->>>>>>> Stashed changes
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -83968,9 +83964,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1545208045}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
---- !u!1001 &1356248259
-=======
   m_GameObject: {fileID: 1271358386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 45.16, y: 0.65, z: 0}
@@ -84113,7 +84106,6 @@ CanvasRenderer:
   m_GameObject: {fileID: 1309594037}
   m_CullTransparentMesh: 0
 --- !u!1001 &1315746179
->>>>>>> Stashed changes
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
