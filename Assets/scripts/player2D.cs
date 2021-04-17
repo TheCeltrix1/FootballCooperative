@@ -23,6 +23,7 @@ public class player2D : MonoBehaviour
     public GameObject backgroundPlayer;
     private float _backgroundPlayerY;
     private float _backgroundPlayerX;
+    private float _backgroundPlayerFinalX;
     private bool _kickSFXBool;
 
     public GameObject faceBallHit;
@@ -46,6 +47,7 @@ public class player2D : MonoBehaviour
     public string hitInFaceAnimationName;
     public string fallAnimationName;
     public float animationDelayTimeMultiplyer = 3;
+    public Animator goalieAnimator;
     private bool _endAnimationRandomBool = false;
     private float _playerSlowdownTime = 0.5f;
     private float _playerSlowdownTimer;
@@ -89,7 +91,7 @@ public class player2D : MonoBehaviour
         _playerAnimator = GetComponent<Animator>();
         _playerAnimator.SetBool("noStamina", false);
         _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        _backgroundPlayerY = backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f;
+        _backgroundPlayerY = (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f) + (backgroundBallPosition.y / 2);
         _backgroundPlayerX = backgroundBallPosition.x - (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.x / 3);
     }
 
@@ -104,7 +106,7 @@ public class player2D : MonoBehaviour
                 {
                     _endAnimation = true;
                     deepBreathsSFX.Play();
-                    _endAnimationRandomBool = (Random.Range(0, 1) == 1);
+                    _endAnimationRandomBool = (Random.Range(0, 2) == 1);
                     _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", false);
@@ -133,9 +135,10 @@ public class player2D : MonoBehaviour
                     _playerAnimator.SetBool("noStamina", true);
                     _playerAnimator.SetBool("maxStamina", true);
                     _animationDelaytime = AnimatorNextClipLength(kickAnimationName);
+                    goalieAnimator.SetTrigger("Jump");
 
                     ballMove = false;
-                    
+
                     //GAME COMPLETE SHENANIGANS
                     GameManager.instance.endgame(5f);
                     Debug.Log("endgame");
@@ -150,7 +153,6 @@ public class player2D : MonoBehaviour
             #region GameEnd
             if (!_endAnimation)
             {
-                backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
                 _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
             }
             else
@@ -176,17 +178,18 @@ public class player2D : MonoBehaviour
                 jumping = false;
             }
             #endregion
+            backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
         }
-        
+        else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX /*+ _backgroundPlayerX*/, _backgroundPlayerY);
 
         #region Kick to background
         if (ballMove)
         {
-            Debug.Log("Hello world");
             StartCoroutine("PassBall");
         }
         else currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
         #endregion
+
     }
 
     void Jump()
@@ -260,7 +263,9 @@ public class player2D : MonoBehaviour
         {
             canPlay = false;
 
+            _backgroundPlayerFinalX = backgroundPlayer.transform.position.x;
             runningSFX.Stop();
+            backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
             _playerAnimator.SetBool("death", true);
             facePlantSFX.Play();
             _animationDelaytime = AnimatorNextClipLength(fallAnimationName);

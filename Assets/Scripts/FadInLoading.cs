@@ -12,6 +12,7 @@ public class FadInLoading : MonoBehaviour
     public Text Text;
     public bool loaded = false;
     public static Player_walking move;
+    public AudioSource doorOpenSFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,7 @@ public class FadInLoading : MonoBehaviour
             fadInWeel.CrossFadeAlpha(1, 2, false);
             Text.CrossFadeAlpha(1, 2, false);
             loaded = true;
+            doorOpenSFX.Play();
         }
     }
 
