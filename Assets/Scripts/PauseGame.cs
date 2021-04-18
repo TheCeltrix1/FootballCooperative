@@ -7,7 +7,7 @@ using TMPro;
 public class PauseGame : MonoBehaviour
 {
    
-    public bool paused = true;
+    public static bool paused = true;
     public bool changePaused = true;
     private static bool _tutorialPlayed = false;
     public float textCount;

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3130985470746865261}
   - component: {fileID: 3130985470746865260}
   m_Layer: 0
-  m_Name: 'Dog food obestacle '
+  m_Name: Dog food obstacle
   m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3130985470823505453}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.208, y: -0.11399998, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 3130985470838702112}
@@ -277,7 +277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3130985470838702125}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.024002075, y: 1.106, z: 0}
+  m_LocalPosition: {x: 0, y: 1.106, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 2}
   m_Children:
   - {fileID: 3130985470823505454}

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject tryagain; // Is this used?
     public static bool running = false;
 
+    public float staminaIncrease = 1;
+    public float healthIncrease = .75f;
     private player2D playerScript;
     private PlayerStats _playerSliderStats;
     public Player_walking playerWalking;
@@ -111,8 +113,8 @@ public class GameManager : MonoBehaviour
     void mainmenu()
     {
         //Debug.Log("loading");
-        currentMaxStamina += 2;
-        currentMaxHealth += 1;
+        currentMaxStamina += staminaIncrease;
+        currentMaxHealth += healthIncrease;
         trips += 1;
         SceneManager.LoadScene(1);
         CancelInvoke("mainmenu");
