@@ -82838,7 +82838,7 @@ MonoBehaviour:
   m_Sprite: {fileID: -1619368868071323680, guid: 9376db5a4d05525478c2898fafe16b1c,
     type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -92212,7 +92212,7 @@ Transform:
   m_LocalScale: {x: 0.10000002, y: 2.2360861, z: 1}
   m_Children: []
   m_Father: {fileID: 2079805087}
-  m_RootOrder: 101
+  m_RootOrder: 93
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 26.542002}
 --- !u!1001 &1824303041
 PrefabInstance:
@@ -93740,7 +93740,7 @@ MonoBehaviour:
   m_Sprite: {fileID: 6488697969309346095, guid: 9376db5a4d05525478c2898fafe16b1c,
     type: 3}
   m_Type: 3
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
   m_FillAmount: 0
@@ -94107,6 +94107,7 @@ Transform:
   - {fileID: 1999671940}
   - {fileID: 1788022967}
   - {fileID: 279360154}
+  - {fileID: 1808547881}
   - {fileID: 1343429462}
   - {fileID: 320789472}
   - {fileID: 1161312672}
@@ -94115,7 +94116,6 @@ Transform:
   - {fileID: 1162029156}
   - {fileID: 1708295317}
   - {fileID: 715549737}
-  - {fileID: 1808547881}
   - {fileID: 30083245}
   - {fileID: 147383928}
   - {fileID: 1492676613}
@@ -94409,7 +94409,7 @@ MonoBehaviour:
   m_Sprite: {fileID: 6488697969309346095, guid: 9376db5a4d05525478c2898fafe16b1c,
     type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
