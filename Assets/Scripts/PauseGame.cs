@@ -7,13 +7,14 @@ using TMPro;
 public class PauseGame : MonoBehaviour
 {
    
-    public bool paused = true;
+    public static bool paused = true;
     public bool changePaused = true;
     private static bool _tutorialPlayed = false;
     public float textCount;
     public TextMeshProUGUI characterText;
     public TextMeshProUGUI choresText;
     public TextMeshProUGUI coOpText;
+    public GameObject darkness;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class PauseGame : MonoBehaviour
             coOpText.enabled = false;
             paused = true;
             _tutorialPlayed = true;
-
+            darkness.SetActive(true);
         }
         else
         {
@@ -32,9 +33,10 @@ public class PauseGame : MonoBehaviour
             characterText.enabled = false;
             choresText.enabled = false;
             coOpText.enabled = false;
+            darkness.SetActive(false);
         }
-            
-           
+
+
         textCount = 2f;
     }
 
@@ -94,5 +96,6 @@ public class PauseGame : MonoBehaviour
     public void ResumeGameTime()
     {
         Time.timeScale = 1;
+        darkness.SetActive(false);
     }
 }

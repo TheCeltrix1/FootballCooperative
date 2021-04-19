@@ -9,10 +9,12 @@ public class spritechange : MonoBehaviour
     // Start is called before the first frame update
     private Animator ani;
     private SpriteRenderer cone;
+    private AudioSource _sfx;
    
     void Start()
     {
         //  render = GetComponent<SpriteRenderer>();
+        _sfx = GetComponent<AudioSource>();
         ani = GetComponentInChildren<Animator>();
         cone = GetComponent<SpriteRenderer>();
     }
@@ -28,6 +30,7 @@ public class spritechange : MonoBehaviour
         {
             ani.SetBool("start", true);
             cone.enabled = false;
+            if (!_sfx.isPlaying) _sfx.Play();
             //Debug.Log("wrong");
         }
     }
