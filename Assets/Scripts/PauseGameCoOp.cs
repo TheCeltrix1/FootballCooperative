@@ -6,12 +6,21 @@ using TMPro;
 
 public class PauseGameCoOp : MonoBehaviour
 {
+    [Header("Tutorial")]
     public bool paused = true;
     public bool changePaused = true;
     private static bool _tutorialPlayed = false;
     public float textCount;
     public TextMeshProUGUI ObsticalsText;
     public TextMeshProUGUI howToPlayText;
+    public TextMeshProUGUI StaminaText;
+
+    [Header("Countdown")]
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI readyText;
+    public float timeRemaining = 3;
+    public bool timerIsRunning = false;
+    public TextMeshProUGUI goText;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +28,10 @@ public class PauseGameCoOp : MonoBehaviour
         {
             howToPlayText.enabled = true;
             ObsticalsText.enabled = false;
+            StaminaText.enabled = false;
+            goText.enabled = false;
+            timeText.enabled = false;
+            readyText.enabled = false;
             paused = true;
             _tutorialPlayed = true;
 
@@ -28,10 +41,14 @@ public class PauseGameCoOp : MonoBehaviour
             paused = false;
             ObsticalsText.enabled = false;
             howToPlayText.enabled = false;
+            StaminaText.enabled = false;
+            timeText.enabled = false;
+            goText.enabled = false;
+            readyText.enabled = false;
         }
 
-
-        textCount = 1f;
+        
+        textCount = 2f;
     }
 
     // Update is called once per frame
@@ -46,11 +63,21 @@ public class PauseGameCoOp : MonoBehaviour
         if (paused)
         {
 
-            if (textCount == 1)
+            if (textCount == 2)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
                     howToPlayText.enabled = false;
+                    StaminaText.enabled = true;
+                    textCount--;
+                }
+            }
+
+           else if (textCount == 1)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    StaminaText.enabled = false;
                     ObsticalsText.enabled = true;
                     textCount--;
                 }
@@ -60,8 +87,12 @@ public class PauseGameCoOp : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    ResumeGameTime();
+                    
                     ObsticalsText.enabled = false;
+                    //timerIsRunning = true;
+                    StartCoroutine(CountDown());
+                    timeText.enabled = true;
+                    readyText.enabled = true;
                     paused = false;
                 }
             }
@@ -69,6 +100,24 @@ public class PauseGameCoOp : MonoBehaviour
 
         }
 
+    }
+
+    IEnumerator CountDown()
+    {
+        while(timeRemaining > 0)
+        {
+            timeText.text = timeRemaining.ToString();
+
+            yield return new WaitForSecondsRealtime(1);
+
+            timeRemaining--;
+        }
+        readyText.enabled = false;
+        timeText.enabled = false;
+        ResumeGameTime();
+        goText.enabled = true;
+        yield return new WaitForSecondsRealtime(1);
+        goText.enabled = false;
     }
 
     public void PauseGameTime()
