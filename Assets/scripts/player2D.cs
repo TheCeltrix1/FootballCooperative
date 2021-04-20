@@ -12,8 +12,9 @@ public class player2D : MonoBehaviour
     public float endPos;
     public float startPos;
     public bool canPlay = true;
+   //cheer and particle effect
     public float cheerdelay;
-
+    public ParticleSystem goaleffect;
     //Second Player Character code
     [Header("BG Player")]
     public bool jumping = false;
@@ -140,6 +141,8 @@ public class player2D : MonoBehaviour
 
                     ballMove = false;
                     cheerSFX.PlayDelayed(cheerdelay);
+                    //   Instantiate(goaleffect, currentBallPosition.gameObject.transform);
+                    plav();
                     //GAME COMPLETE SHENANIGANS
                     GameManager.instance.endgame(5f);
                     Debug.Log("endgame");
@@ -192,7 +195,12 @@ public class player2D : MonoBehaviour
         #endregion
 
     }
-
+    void plav()
+    {
+        Debug.Log("spawning");
+        //  Instantiate(goaleffect, goal.gameObject.transform);
+        goaleffect.Play();
+    }
     void Jump()
     {
         if (!_playerCollider.IsTouchingLayers(JumpLayer))
