@@ -14,6 +14,7 @@ public class CreditSceneTextMovement : MonoBehaviour
     void Start()
     {
         fadIn.canvasRenderer.SetAlpha(0f);
+        speed = GetComponentInParent<Canvas>().transform.lossyScale.y * speed;
     }
 
     // Update is called once per frame

@@ -653,8 +653,9 @@ MonoBehaviour:
     \xBB Vacuum 3.wav  by phatkatz4\r\n\r\nCeramic Set Down  by f4ngy\r\n\r\nSizzling.aif 
     by JasonElrod\r\n\npoof.wav by Worldmaxter\n\r\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1897a01214efa749ae10c2e4671d974, type: 2}
+  m_sharedMaterial: {fileID: 555485087077499649, guid: b1897a01214efa749ae10c2e4671d974,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -814,8 +815,9 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1897a01214efa749ae10c2e4671d974, type: 2}
+  m_sharedMaterial: {fileID: 555485087077499649, guid: b1897a01214efa749ae10c2e4671d974,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1227,8 +1229,9 @@ MonoBehaviour:
 
     Laura Ryder'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1897a01214efa749ae10c2e4671d974, type: 2}
+  m_sharedMaterial: {fileID: 555485087077499649, guid: b1897a01214efa749ae10c2e4671d974,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1452,8 +1455,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1897a01214efa749ae10c2e4671d974, type: 2}
+  m_sharedMaterial: {fileID: 555485087077499649, guid: b1897a01214efa749ae10c2e4671d974,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1711,8 +1715,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sound Effects Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b1897a01214efa749ae10c2e4671d974, type: 2}
+  m_sharedMaterial: {fileID: 555485087077499649, guid: b1897a01214efa749ae10c2e4671d974,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
