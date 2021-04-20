@@ -12,6 +12,7 @@ public class player2D : MonoBehaviour
     public float endPos;
     public float startPos;
     public bool canPlay = true;
+    public float cheerdelay;
 
     //Second Player Character code
     [Header("BG Player")]
@@ -65,7 +66,7 @@ public class player2D : MonoBehaviour
     public AudioSource deepBreathsSFX;
     public AudioSource faceHitSFX;
     public AudioSource runningSFX;
-
+    public AudioSource cheerSFX;
     #region Statistics
     [Header("Statistics")]
     public float stamina;
@@ -138,7 +139,7 @@ public class player2D : MonoBehaviour
                     goalieAnimator.SetTrigger("Jump");
 
                     ballMove = false;
-
+                    cheerSFX.PlayDelayed(cheerdelay);
                     //GAME COMPLETE SHENANIGANS
                     GameManager.instance.endgame(5f);
                     Debug.Log("endgame");
