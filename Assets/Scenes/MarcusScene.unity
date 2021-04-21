@@ -314,7 +314,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Revenge of the Ben
+  m_text: This is the door to the Football Cooperative. To go to the co-op move Ben
+    over to the door and left click on the door.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -407,8 +408,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 661.9, y: 189.2}
-  m_SizeDelta: {x: 296.10513, y: 139.69817}
+  m_AnchoredPosition: {x: 602, y: 137.9}
+  m_SizeDelta: {x: 415.8187, y: 242.28577}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &231820886
 GameObject:
@@ -7664,8 +7665,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 66.5, y: 196.2}
-  m_SizeDelta: {x: 255.04889, y: 125.55725}
+  m_AnchoredPosition: {x: 49, y: 196.2}
+  m_SizeDelta: {x: 363.93628, y: 125.55725}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1042947854
 CanvasRenderer:
@@ -7694,7 +7695,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ben will strike back
+  m_text: This is Ben, Ben has a unhealty lifestyle, help Ben get more active.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8078,8 +8079,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -318.2, y: 192.9}
-  m_SizeDelta: {x: 249.60693, y: 132.10796}
+  m_AnchoredPosition: {x: -409, y: -48.4}
+  m_SizeDelta: {x: 629.53424, y: 356.85364}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1169608095
 CanvasRenderer:
@@ -8108,7 +8109,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attack of the Ben
+  m_text: "These are the house chores. \n\nMove Ben over and Left click on the icon
+    to bring up the chores, from the list select a chore.\n\nYou can only do one
+    chore a day, doing chores increases  stamina."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

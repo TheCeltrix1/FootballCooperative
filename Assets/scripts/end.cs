@@ -30,7 +30,7 @@ public class end : MonoBehaviour
     IEnumerator Fade()
     {
         fadIn.CrossFadeAlpha(1, 4, false);
-        yield return /*new WaitForSeconds(5f)*/ null;
+        yield return new WaitForSeconds(5f);
         SceneManager.LoadScene(5);
     }
 }
