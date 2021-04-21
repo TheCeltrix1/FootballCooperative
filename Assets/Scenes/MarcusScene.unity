@@ -225,8 +225,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadIn: {fileID: 577851400}
-  fadInWeel: {fileID: 1795097984}
-  Text: {fileID: 415807894}
+  fadInWeel:
+  - {fileID: 1795097984}
+  Text:
+  - {fileID: 415807894}
   doorOpenSFX: {fileID: 231820888}
 --- !u!4 &86325272
 Transform:

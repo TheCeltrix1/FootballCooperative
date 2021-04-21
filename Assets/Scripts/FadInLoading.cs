@@ -8,8 +8,8 @@ public class FadInLoading : MonoBehaviour
 {
     public Image fadIn;
     public static Image fadInStatic;
-    public Image fadInWeel;
-    public Text Text;
+    public Image[] fadInWeel;
+    public Text[] Text;
     private int _currentScene;
     private int _loadingScene;
     private bool _loaded = false;
@@ -19,8 +19,18 @@ public class FadInLoading : MonoBehaviour
     void Start()
     {
         fadIn.canvasRenderer.SetAlpha(0f);
-        fadInWeel.canvasRenderer.SetAlpha(0f);
-        Text.canvasRenderer.SetAlpha(0f);
+        int i = 0;
+        foreach  (Image canvieBoi in fadInWeel)
+        {
+            fadInWeel[i].canvasRenderer.SetAlpha(0f);
+            i++;
+        }
+        i = 0;
+        foreach (Text item in Text)
+        {
+            Text[i].canvasRenderer.SetAlpha(0f);
+            i++;
+        }
         fadInStatic = fadIn;
         //move = FindObjectOfType<Player_walking>();
         _currentScene = SceneManager.GetActiveScene().buildIndex;
@@ -43,8 +53,18 @@ public class FadInLoading : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         fadIn.CrossFadeAlpha(1, 2, false);
-        fadInWeel.CrossFadeAlpha(1, 2, false);
-        Text.CrossFadeAlpha(1, 2, false);
+        int i = 0;
+        foreach (Image canvieBoi in fadInWeel)
+        {
+            fadInWeel[i].CrossFadeAlpha(1, 2, false);
+            i++;
+        }
+        i = 0;
+        foreach (Text item in Text)
+        {
+            Text[i].CrossFadeAlpha(1, 2, false);
+            i++;
+        }
         _loaded = true;
         if (doorOpenSFX) 
         { 
