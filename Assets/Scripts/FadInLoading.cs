@@ -13,7 +13,7 @@ public class FadInLoading : MonoBehaviour
     private int _currentScene;
     private int _loadingScene;
     private bool _loaded = false;
-    //public static Player_walking move;
+    public static Player_walking move;
     public AudioSource doorOpenSFX;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class FadInLoading : MonoBehaviour
             i++;
         }
         fadInStatic = fadIn;
-        //move = FindObjectOfType<Player_walking>();
+        move = FindObjectOfType<Player_walking>();
         _currentScene = SceneManager.GetActiveScene().buildIndex;
     }
 
@@ -78,7 +78,7 @@ public class FadInLoading : MonoBehaviour
         fadInStatic.CrossFadeAlpha(1, duration / 2, false);
         yield return new WaitForSeconds(duration / 2);
         if (obj != null) obj.SetActive(false);
-        //move.movementspeed = 300;
+        move.movementspeed = 300;
         fadInStatic.CrossFadeAlpha(0, duration / 2, false);
         yield return null;
     }
