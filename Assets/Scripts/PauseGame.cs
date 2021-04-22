@@ -6,12 +6,14 @@ using TMPro;
 
 public class PauseGame : MonoBehaviour
 {
-   
+
     public static bool paused = true;
     public bool changePaused = true;
     private static bool _tutorialPlayed = false;
     public float textCount;
     public TextMeshProUGUI characterText;
+    public TextMeshProUGUI characterText2;
+    public TextMeshProUGUI characterText3;
     public TextMeshProUGUI choresText;
     public TextMeshProUGUI coOpText;
     public GameObject darkness;
@@ -21,6 +23,8 @@ public class PauseGame : MonoBehaviour
         if (!_tutorialPlayed)
         {
             characterText.enabled = true;
+            characterText2.enabled = false;
+            characterText3.enabled = false;
             choresText.enabled = false;
             coOpText.enabled = false;
             paused = true;
@@ -31,13 +35,15 @@ public class PauseGame : MonoBehaviour
         {
             paused = false;
             characterText.enabled = false;
+            characterText2.enabled = false;
+            characterText3.enabled = false;
             choresText.enabled = false;
             coOpText.enabled = false;
             darkness.SetActive(false);
         }
 
 
-        textCount = 2f;
+        textCount = 4f;
     }
 
     // Update is called once per frame
@@ -49,43 +55,41 @@ public class PauseGame : MonoBehaviour
             changePaused = false;
         }
 
-        if (paused)
+        if (paused && Input.GetMouseButtonDown(0))
         {
+            characterText.enabled = false;
+            characterText2.enabled = false;
+            characterText3.enabled = false;
+            choresText.enabled = false;
+            coOpText.enabled = false;
 
-            if( textCount == 2)
+            switch (textCount)
             {
-               if (Input.GetMouseButtonDown(0))
-               {
-                    characterText.enabled = false;
+                case 4:
+                    characterText2.enabled = true;
+                    break;
+
+                case 3:
+                    characterText3.enabled = true;
+                    break;
+
+                case 2:
                     choresText.enabled = true;
-                    textCount--;
-               }
-            }
+                    break;
 
-
-           else if (textCount == 1)
-           {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    choresText.enabled = false;
+                case 1:
                     coOpText.enabled = true;
-                    textCount --;
-                }
-           }
+                    break;
 
-            else if(textCount == 0)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
+                case 0:
                     ResumeGameTime();
-                    coOpText.enabled = false;
                     paused = false;
-                }
+                    break;
             }
-            
 
+            textCount--;
         }
-            
+
     }
 
     public void PauseGameTime()
