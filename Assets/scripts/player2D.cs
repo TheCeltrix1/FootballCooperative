@@ -98,6 +98,7 @@ public class player2D : MonoBehaviour
         _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
         _backgroundPlayerY = (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f) + (backgroundBallPosition.y / 2);
         _backgroundPlayerX = backgroundBallPosition.x - (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.x / 3);
+        _backgroundPlayerFinalX = transform.position.x + _backgroundPlayerX;
     }
 
     void Update()
