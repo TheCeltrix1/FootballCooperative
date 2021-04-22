@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2079805087}
     m_Modifications:
+    - target: {fileID: 598999282576492152, guid: a0984d9b793f6124e9cd4198d5be236e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5968769939285171635, guid: a0984d9b793f6124e9cd4198d5be236e,
         type: 3}
       propertyPath: m_Name
@@ -136,17 +141,17 @@ PrefabInstance:
     - target: {fileID: 7824079193161859246, guid: a0984d9b793f6124e9cd4198d5be236e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 104.517075
+      value: 104.29
       objectReference: {fileID: 0}
     - target: {fileID: 7824079193161859246, guid: a0984d9b793f6124e9cd4198d5be236e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1710884
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 7824079193161859246, guid: a0984d9b793f6124e9cd4198d5be236e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4828.3447
+      value: 4828.34
       objectReference: {fileID: 0}
     - target: {fileID: 7824079193161859246, guid: a0984d9b793f6124e9cd4198d5be236e,
         type: 3}
@@ -243,6 +248,27 @@ PrefabInstance:
       propertyPath: InitialModule.startSpeed.scalar
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8248383495051222063, guid: a0984d9b793f6124e9cd4198d5be236e,
+        type: 3}
+      propertyPath: UVModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248383495051222063, guid: a0984d9b793f6124e9cd4198d5be236e,
+        type: 3}
+      propertyPath: UVModule.mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248383495051222063, guid: a0984d9b793f6124e9cd4198d5be236e,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248383495051222063, guid: a0984d9b793f6124e9cd4198d5be236e,
+        type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1ab323f4c1b1b3d4d920f78a55e026a2,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0984d9b793f6124e9cd4198d5be236e, type: 3}
 --- !u!4 &11807652 stripped
@@ -30077,7 +30103,7 @@ PrefabInstance:
     - target: {fileID: 4351347511483315665, guid: da1c4f7949b2ede4ea230600ec7d8b42,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4351347511483315666, guid: da1c4f7949b2ede4ea230600ec7d8b42,
         type: 3}
