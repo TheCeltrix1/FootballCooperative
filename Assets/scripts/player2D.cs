@@ -13,6 +13,11 @@ public class player2D : MonoBehaviour
     public float startPos;
     public bool canPlay = true;
 
+    [Header("Goal Effects")]
+   //cheer and particle effect
+    public float cheerdelay;
+    public ParticleSystem goaleffect;
+
     //Second Player Character code
     [Header("BG Player")]
     public bool jumping = false;
@@ -65,7 +70,7 @@ public class player2D : MonoBehaviour
     public AudioSource deepBreathsSFX;
     public AudioSource faceHitSFX;
     public AudioSource runningSFX;
-
+    public AudioSource cheerSFX;
     #region Statistics
     [Header("Statistics")]
     public float stamina;
@@ -104,6 +109,7 @@ public class player2D : MonoBehaviour
             {
                 if (_playerCollider.IsTouchingLayers(JumpLayer))
                 {
+                    int loadTime;
                     _endAnimation = true;
                     deepBreathsSFX.Play();
                     _endAnimationRandomBool = (Random.Range(0, 2) == 1);
@@ -114,6 +120,8 @@ public class player2D : MonoBehaviour
                     {
                         _animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
                         if (!deepBreathsSFX.isPlaying) deepBreathsSFX.Play();
+                        deepBreathsSFX.loop = true;
+                        loadTime = 5;
                     }
                     else
                     {
@@ -121,8 +129,12 @@ public class player2D : MonoBehaviour
                         if (!faceHitSFX.isPlaying) faceHitSFX.Play();
                         faceBallHit.GetComponent<BallHitPlayer>().playerFacePosition = transform;
                         faceBallHit.GetComponent<BallHitPlayer>().StartCoroutine("HitPlayerInTheFace");
+                        loadTime = 1;
                     }
-                    GameManager.instance.gohome(_animationDelaytime * _animationDelaytime);
+                    GameManager.instance.ReturnHome();
+                    FindObjectOfType<FadInLoading>().SceneToLoad(1);
+                    FindObjectOfType<FadInLoading>().StartCoroutine("LoadingScreem", loadTime);
+                    //GameManager.instance.gohome(_animationDelaytime * _animationDelaytime);
                 }
                 return;
             }
@@ -138,7 +150,9 @@ public class player2D : MonoBehaviour
                     goalieAnimator.SetTrigger("Jump");
 
                     ballMove = false;
-
+                    cheerSFX.PlayDelayed(cheerdelay);
+                    //   Instantiate(goaleffect, currentBallPosition.gameObject.transform);
+                    plav();
                     //GAME COMPLETE SHENANIGANS
                     GameManager.instance.endgame(5f);
                     Debug.Log("endgame");
@@ -167,20 +181,17 @@ public class player2D : MonoBehaviour
             _playerAnimator.SetBool("isGrounded", _playerCollider.IsTouchingLayers(JumpLayer));
 
             #region Movement
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !_endAnimation)
             {
                 Jump();
                 //GetComponent<Rigidbody2D> ().AddForce (Vector2.up * jump);
                 jumping = true;
             }
-            else
-            {
-                jumping = false;
-            }
+            else jumping = false;
             #endregion
             backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
         }
-        else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX /*+ _backgroundPlayerX*/, _backgroundPlayerY);
+        else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX, _backgroundPlayerY);
 
         #region Kick to background
         if (ballMove)
@@ -190,6 +201,12 @@ public class player2D : MonoBehaviour
         else currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
         #endregion
 
+    }
+
+    void plav()
+    {
+        //  Instantiate(goaleffect, goal.gameObject.transform);
+        goaleffect.Play();
     }
 
     void Jump()
@@ -269,7 +286,8 @@ public class player2D : MonoBehaviour
             _playerAnimator.SetBool("death", true);
             facePlantSFX.Play();
             _animationDelaytime = AnimatorNextClipLength(fallAnimationName);
-            GameManager.instance.death(_animationDelaytime * animationDelayTimeMultiplyer);
+            FindObjectOfType<FadInLoading>().SceneToLoad(2);
+            FindObjectOfType<FadInLoading>().StartCoroutine("LoadingScreem", 2);
         }
     }
 }
