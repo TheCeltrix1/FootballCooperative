@@ -109,7 +109,7 @@ public class player2D : MonoBehaviour
             {
                 if (_playerCollider.IsTouchingLayers(JumpLayer))
                 {
-                    int loadTime;
+                    float loadTime;
                     _endAnimation = true;
                     deepBreathsSFX.Play();
                     _endAnimationRandomBool = (Random.Range(0, 2) == 1);
@@ -121,7 +121,7 @@ public class player2D : MonoBehaviour
                         _animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
                         if (!deepBreathsSFX.isPlaying) deepBreathsSFX.Play();
                         deepBreathsSFX.loop = true;
-                        loadTime = 5;
+                        loadTime = 3;
                     }
                     else
                     {
@@ -129,12 +129,11 @@ public class player2D : MonoBehaviour
                         if (!faceHitSFX.isPlaying) faceHitSFX.Play();
                         faceBallHit.GetComponent<BallHitPlayer>().playerFacePosition = transform;
                         faceBallHit.GetComponent<BallHitPlayer>().StartCoroutine("HitPlayerInTheFace");
-                        loadTime = 1;
+                        loadTime = 0.5f;
                     }
                     GameManager.instance.ReturnHome();
                     FindObjectOfType<FadInLoading>().SceneToLoad(1);
-                    FindObjectOfType<FadInLoading>().StartCoroutine("LoadingScreem", loadTime);
-                    //GameManager.instance.gohome(_animationDelaytime * _animationDelaytime);
+                    FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(loadTime, 1));
                 }
                 return;
             }
@@ -153,7 +152,6 @@ public class player2D : MonoBehaviour
                     cheerSFX.PlayDelayed(cheerdelay);
                     //   Instantiate(goaleffect, currentBallPosition.gameObject.transform);
                     plav();
-                    //GAME COMPLETE SHENANIGANS
                     GameManager.instance.endgame(5f);
                     Debug.Log("endgame");
                 }
@@ -184,7 +182,6 @@ public class player2D : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && !_endAnimation)
             {
                 Jump();
-                //GetComponent<Rigidbody2D> ().AddForce (Vector2.up * jump);
                 jumping = true;
             }
             else jumping = false;
@@ -287,7 +284,7 @@ public class player2D : MonoBehaviour
             facePlantSFX.Play();
             _animationDelaytime = AnimatorNextClipLength(fallAnimationName);
             FindObjectOfType<FadInLoading>().SceneToLoad(2);
-            FindObjectOfType<FadInLoading>().StartCoroutine("LoadingScreem", 2);
+            FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(2, 2));
         }
     }
 }
