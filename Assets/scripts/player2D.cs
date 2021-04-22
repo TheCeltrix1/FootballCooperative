@@ -11,7 +11,7 @@ public class player2D : MonoBehaviour
     public LayerMask JumpLayer;
     public float endPos;
     public float startPos;
-    public bool canPlay = true;
+    public static bool canPlay = false;
 
     [Header("Goal Effects")]
    //cheer and particle effect
@@ -134,6 +134,7 @@ public class player2D : MonoBehaviour
                     GameManager.instance.ReturnHome();
                     FindObjectOfType<FadInLoading>().SceneToLoad(1);
                     FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(loadTime, 1));
+                    canPlay = false;
                 }
                 return;
             }
@@ -154,6 +155,7 @@ public class player2D : MonoBehaviour
                     plav();
                     GameManager.instance.endgame(5f);
                     Debug.Log("endgame");
+                    canPlay = false;
                 }
                 return;
             }
