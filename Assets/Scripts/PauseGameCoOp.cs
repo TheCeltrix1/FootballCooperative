@@ -27,7 +27,7 @@ public class PauseGameCoOp : MonoBehaviour
     {
         if (!_tutorialPlayed)
         {
-            runner.enabled = false;
+          //  runner.enabled = false;
             howToPlayText.enabled = true;
             ObsticalsText.enabled = false;
             StaminaText.enabled = false;
@@ -40,7 +40,7 @@ public class PauseGameCoOp : MonoBehaviour
         }
         else
         {
-            runner.enabled = true;
+          //  runner.enabled = true;
             paused = false;
             ObsticalsText.enabled = false;
             howToPlayText.enabled = false;
@@ -48,6 +48,7 @@ public class PauseGameCoOp : MonoBehaviour
             timeText.enabled = false;
             goText.enabled = false;
             readyText.enabled = false;
+            player2D.canPlay = true;
         }
 
         
@@ -115,7 +116,7 @@ public class PauseGameCoOp : MonoBehaviour
 
             timeRemaining--;
         }
-        runner.enabled = true;
+      //  runner.enabled = true;
         readyText.enabled = false;
         timeText.enabled = false;
         player2D.canPlay = true;
