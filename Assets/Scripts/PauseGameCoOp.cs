@@ -122,6 +122,8 @@ public class PauseGameCoOp : MonoBehaviour
         goText.enabled = true;
         yield return new WaitForSecondsRealtime(1);
         goText.enabled = false;
+        player2D.canPlay = true;
+        yield return null;
     }
 
     public void PauseGameTime()
