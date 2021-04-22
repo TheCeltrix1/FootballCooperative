@@ -15,7 +15,7 @@ public class FadInLoading : MonoBehaviour
     private bool _loaded = false;
     public static Player_walking move;
     public AudioSource doorOpenSFX;
-    // Start is called before the first frame update
+
     void Start()
     {
         fadIn.canvasRenderer.SetAlpha(0f);
@@ -49,7 +49,12 @@ public class FadInLoading : MonoBehaviour
         _loadingScene = num;
     }
 
-    public IEnumerator LoadingScreem(float delay = 0)
+    public void LoadSceneFunction()
+    {
+        StartCoroutine(LoadingScreem());
+    }
+
+    public IEnumerator LoadingScreem(float delay = 0, int loadType = 0)
     {
         yield return new WaitForSeconds(delay);
         fadIn.CrossFadeAlpha(1, 2, false);
@@ -60,10 +65,31 @@ public class FadInLoading : MonoBehaviour
             i++;
         }
         i = 0;
-        foreach (Text item in Text)
+        switch (loadType)
         {
-            Text[i].CrossFadeAlpha(1, 2, false);
-            i++;
+            case 0:
+                foreach (Text item in Text)
+                {
+                    Text[i].CrossFadeAlpha(1, 2, false);
+                    i++;
+                }
+                break;
+
+            case 1:
+                foreach (Text item in Text)
+                {
+                    if (i == 0 || i == 1) Text[i].CrossFadeAlpha(1, 2, false);
+                    i++;
+                }
+                break;
+
+            case 2:
+                foreach (Text item in Text)
+                {
+                    if (i == 0 || i == 2) Text[i].CrossFadeAlpha(1, 2, false);
+                    i++;
+                }
+                break;
         }
         _loaded = true;
         if (doorOpenSFX) 
@@ -85,6 +111,6 @@ public class FadInLoading : MonoBehaviour
 
     public void CheckDistance(Transform trans)
     {
-        if (Vector3.Distance(trans.position, GameManager.instance.playerWalking.gameObject.transform.position) <= 30) StartCoroutine("LoadingScreem",0);
+        if (Vector3.Distance(trans.position, GameManager.instance.playerWalking.gameObject.transform.position) <= 30) StartCoroutine(LoadingScreem(0));
     }
 }

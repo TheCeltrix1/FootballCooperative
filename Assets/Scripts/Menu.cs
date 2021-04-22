@@ -8,16 +8,16 @@ public class Menu : MonoBehaviour
 {
 
     public GameObject panel;
-    public Image fadIn;
-    public Image fadInWheel;
-    public bool changeScene = false;
+    //public Image fadIn;
+    //public Image fadInWheel;
 
     public void Start()
     {
-        fadIn.canvasRenderer.SetAlpha(0f);
-        fadInWheel.canvasRenderer.SetAlpha(0f);
+        //fadIn.canvasRenderer.SetAlpha(0f);
+        //fadInWheel.canvasRenderer.SetAlpha(0f);
     }
-    public void PlayGamelevel()
+
+    /*public void PlayGamelevel()
     {
         fadIn.CrossFadeAlpha(1, 2, false);
         fadInWheel.CrossFadeAlpha(1, 2, false);
@@ -29,7 +29,7 @@ public class Menu : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("MarcusScene");
-    }
+    }*/
 
 
     public void GameMenuControls()
@@ -45,18 +45,4 @@ public class Menu : MonoBehaviour
         panel.SetActive(false);
 
     }
-
-
-    public void QuitGameMenu()
-    {
-
-#if UNITY_STANDALONE
-        Application.Quit();
-#endif
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-    }
-
 }
