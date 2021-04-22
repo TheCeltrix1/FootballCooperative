@@ -99,6 +99,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ReturnHome()
+    {
+        currentMaxStamina += staminaIncrease;
+        currentMaxHealth += healthIncrease;
+        trips += 1;
+    }
+
     public void gohome(float time)
     {
         Invoke("mainmenu", time);

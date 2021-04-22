@@ -131,6 +131,7 @@ public class player2D : MonoBehaviour
                         faceBallHit.GetComponent<BallHitPlayer>().StartCoroutine("HitPlayerInTheFace");
                         loadTime = 1;
                     }
+                    GameManager.instance.ReturnHome();
                     FindObjectOfType<FadInLoading>().SceneToLoad(1);
                     FindObjectOfType<FadInLoading>().StartCoroutine("LoadingScreem", loadTime);
                     //GameManager.instance.gohome(_animationDelaytime * _animationDelaytime);
