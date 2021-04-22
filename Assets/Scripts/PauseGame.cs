@@ -12,6 +12,8 @@ public class PauseGame : MonoBehaviour
     private static bool _tutorialPlayed = false;
     public float textCount;
     public TextMeshProUGUI characterText;
+    public TextMeshProUGUI characterText2;
+    public TextMeshProUGUI characterText3;
     public TextMeshProUGUI choresText;
     public TextMeshProUGUI coOpText;
     public GameObject darkness;
@@ -21,6 +23,8 @@ public class PauseGame : MonoBehaviour
         if (!_tutorialPlayed)
         {
             characterText.enabled = true;
+            characterText2.enabled = false;
+            characterText3.enabled = false;
             choresText.enabled = false;
             coOpText.enabled = false;
             paused = true;
@@ -31,13 +35,15 @@ public class PauseGame : MonoBehaviour
         {
             paused = false;
             characterText.enabled = false;
+            characterText2.enabled = false;
+            characterText3.enabled = false;
             choresText.enabled = false;
             coOpText.enabled = false;
             darkness.SetActive(false);
         }
 
 
-        textCount = 2f;
+        textCount = 4f;
     }
 
     // Update is called once per frame
@@ -51,12 +57,31 @@ public class PauseGame : MonoBehaviour
 
         if (paused)
         {
+            if (textCount == 4)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    characterText.enabled = false;
+                    characterText2.enabled = true;
+                    textCount--;
+                }
+            }
 
-            if( textCount == 2)
+            else if (textCount == 3)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    characterText2.enabled = false;
+                    characterText3.enabled = true;
+                    textCount--;
+                }
+            }
+
+            else  if ( textCount == 2)
             {
                if (Input.GetMouseButtonDown(0))
                {
-                    characterText.enabled = false;
+                    characterText3.enabled = false;
                     choresText.enabled = true;
                     textCount--;
                }
