@@ -6,7 +6,7 @@ using TMPro;
 
 public class PauseGame : MonoBehaviour
 {
-   
+
     public static bool paused = true;
     public bool changePaused = true;
     private static bool _tutorialPlayed = false;
@@ -55,62 +55,41 @@ public class PauseGame : MonoBehaviour
             changePaused = false;
         }
 
-        if (paused)
+        if (paused && Input.GetMouseButtonDown(0))
         {
-            if (textCount == 4)
+            characterText.enabled = false;
+            characterText2.enabled = false;
+            characterText3.enabled = false;
+            choresText.enabled = false;
+            coOpText.enabled = false;
+
+            switch (textCount)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    characterText.enabled = false;
+                case 4:
                     characterText2.enabled = true;
-                    textCount--;
-                }
-            }
+                    break;
 
-            else if (textCount == 3)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    characterText2.enabled = false;
+                case 3:
                     characterText3.enabled = true;
-                    textCount--;
-                }
-            }
+                    break;
 
-            else  if ( textCount == 2)
-            {
-               if (Input.GetMouseButtonDown(0))
-               {
-                    characterText3.enabled = false;
+                case 2:
                     choresText.enabled = true;
-                    textCount--;
-               }
-            }
+                    break;
 
-
-           else if (textCount == 1)
-           {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    choresText.enabled = false;
+                case 1:
                     coOpText.enabled = true;
-                    textCount --;
-                }
-           }
+                    break;
 
-            else if(textCount == 0)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
+                case 0:
                     ResumeGameTime();
-                    coOpText.enabled = false;
                     paused = false;
-                }
+                    break;
             }
-            
 
+            textCount--;
         }
-            
+
     }
 
     public void PauseGameTime()
