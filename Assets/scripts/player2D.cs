@@ -103,8 +103,8 @@ public class player2D : MonoBehaviour
 
     void Update()
     {
-        if (canPlay)
-        {
+       // if (canPlay)
+       // {
             #region Stamina Management
             if (stamina <= 0 && _currentMaxStamina < _totalMaxStamina && !_endAnimation)
             {
@@ -182,7 +182,7 @@ public class player2D : MonoBehaviour
             _playerAnimator.SetBool("isGrounded", _playerCollider.IsTouchingLayers(JumpLayer));
 
             #region Movement
-            if (Input.GetMouseButtonDown(0) && !_endAnimation)
+            if (Input.GetMouseButtonDown(0) && !_endAnimation && canPlay)
             {
                 Jump();
                 jumping = true;
@@ -190,8 +190,8 @@ public class player2D : MonoBehaviour
             else jumping = false;
             #endregion
             backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
-        }
-        else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX, _backgroundPlayerY);
+      //  }
+       // else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX, _backgroundPlayerY);
 
         #region Kick to background
         if (ballMove)
@@ -279,7 +279,7 @@ public class player2D : MonoBehaviour
         if (collision.collider.tag == "block")
         {
             canPlay = false;
-
+            GameManager.running = false;
             _backgroundPlayerFinalX = backgroundPlayer.transform.position.x;
             runningSFX.Stop();
             backgroundPlayer.GetComponent<Animator>().SetBool("end", true);

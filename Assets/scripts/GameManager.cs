@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         {
             stamina = currentMaxStamina;
             health = currentMaxHealth;
+         //   Debug.Log("fell");
         }
     }
 
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("death");
         if (gameover == false)
         {
-            //   gameover = true;
+             // gameover = true;
             //  tryagain.SetActive(true);
             Invoke("restart", deathDelay);
         }

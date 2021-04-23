@@ -30104,7 +30104,7 @@ PrefabInstance:
     - target: {fileID: 4351347511483315665, guid: da1c4f7949b2ede4ea230600ec7d8b42,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4351347511483315666, guid: da1c4f7949b2ede4ea230600ec7d8b42,
         type: 3}
@@ -82202,18 +82202,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1457327942}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &691247197 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 652116010345850279, guid: 04498dc5eb90e544ca6e494306ca7fce,
-    type: 3}
-  m_PrefabInstance: {fileID: 652116010547519242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcac0fea70292d9469ea2f0ed33d0f78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &691968992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90431,7 +90419,6 @@ MonoBehaviour:
   ObsticalsText: {fileID: 1140867505}
   howToPlayText: {fileID: 1309594039}
   StaminaText: {fileID: 2009561452}
-  runner: {fileID: 691247197}
   timeText: {fileID: 2078161658}
   readyText: {fileID: 1079575916}
   timeRemaining: 3
