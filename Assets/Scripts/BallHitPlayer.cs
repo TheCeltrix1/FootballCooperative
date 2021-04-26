@@ -25,7 +25,6 @@ public class BallHitPlayer : MonoBehaviour
             else
             {
                 transform.position = Vector3.Lerp(transform.position, playerFacePosition.position + _startPos, (_hitTimer - (hitTime / 2)) / (hitTime / 2));
-                Debug.Log((_hitTimer - (hitTime / 2)) / (hitTime / 2));
                 _hitTimer += Time.deltaTime;
             }
             yield return null;

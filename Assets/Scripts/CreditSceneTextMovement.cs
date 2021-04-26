@@ -35,6 +35,7 @@ public class CreditSceneTextMovement : MonoBehaviour
     {
         fadIn.CrossFadeAlpha(1, 5, false);
         yield return new WaitForSeconds(6f);
+        GameManager.ResetManager();
         SceneManager.LoadScene(0);
     }
 
