@@ -29396,6 +29396,7 @@ MonoBehaviour:
   trips: 0
   completelvlUI: {fileID: 0}
   tryagain: {fileID: 0}
+  running: 0
   staminaIncrease: 1
   healthIncrease: 0.75
   playerWalking: {fileID: 0}
@@ -88823,6 +88824,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2033378313608859850, guid: e3925a45795b7ed46980ac9bf638d7ff,
         type: 3}
+    - target: {fileID: 2841384584744537746, guid: 0e955bd58e7c94348afef72129763fbe,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2841384584744537744, guid: 0e955bd58e7c94348afef72129763fbe, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0e955bd58e7c94348afef72129763fbe, type: 3}

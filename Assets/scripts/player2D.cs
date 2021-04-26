@@ -106,6 +106,7 @@ public class player2D : MonoBehaviour
         #region Stamina Management
         if (stamina <= 0 && _currentMaxStamina < _totalMaxStamina && !_endAnimation)
         {
+            _backgroundPlayerFinalX = backgroundPlayer.transform.position.x;
             if (_playerCollider.IsTouchingLayers(JumpLayer))
             {
                 float loadTime;
@@ -140,6 +141,7 @@ public class player2D : MonoBehaviour
         }
         else if (stamina <= 0 && _currentMaxStamina >= _totalMaxStamina && !_endAnimation)
         {
+            _backgroundPlayerFinalX = backgroundPlayer.transform.position.x;
             if (_playerCollider.IsTouchingLayers(JumpLayer))
             {
                 StartCoroutine(StopMoving(0.5f));
@@ -247,7 +249,7 @@ public class player2D : MonoBehaviour
             _playerSlowdownTimer -= Time.deltaTime;
             if (_playerRigidbody.velocity.magnitude == 0)
             {
-                if (_endAnimation)
+                if (_endAnimation && _currentMaxStamina >= _totalMaxStamina)
                 {
                     finalKickSFX.Play();
                     _playerAnimator.SetBool("noStamina", true);
@@ -257,9 +259,9 @@ public class player2D : MonoBehaviour
 
                     ballMove = false;
                     cheerSFX.PlayDelayed(cheerdelay);
-                    //   Instantiate(goaleffect, currentBallPosition.gameObject.transform);
                     plav();
                     GameManager.instance.endgame(2f);
+                    break;
                 }
                 StopCoroutine("StopMoving");
             }
@@ -298,10 +300,10 @@ public class player2D : MonoBehaviour
     {
         if (collision.collider.tag == "block")
         {
+            canPlay = false;
             _backgroundPlayerFinalX = backgroundPlayer.transform.position.x;
             backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
             StartCoroutine(StopMoving(2));
-            canPlay = false;
             GameManager.instance.running = false;
             _playerAnimator.SetBool("death", true);
             facePlantSFX.Play();
