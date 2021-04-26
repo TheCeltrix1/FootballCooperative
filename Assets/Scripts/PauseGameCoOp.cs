@@ -9,7 +9,7 @@ public class PauseGameCoOp : MonoBehaviour
     [Header("Tutorial")]
     public bool paused = true;
     public bool changePaused = true;
-    private static bool _tutorialPlayed = false;
+    public static bool tutorialPlayed = false;
     public float textCount;
     public TextMeshProUGUI ObsticalsText;
     public TextMeshProUGUI howToPlayText;
@@ -25,7 +25,7 @@ public class PauseGameCoOp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!_tutorialPlayed)
+        if (!tutorialPlayed)
         {
           
             howToPlayText.enabled = true;
@@ -35,7 +35,7 @@ public class PauseGameCoOp : MonoBehaviour
             timeText.enabled = false;
             readyText.enabled = false;
             paused = true;
-            _tutorialPlayed = true;
+            tutorialPlayed = true;
 
         }
         else
@@ -121,6 +121,7 @@ public class PauseGameCoOp : MonoBehaviour
         timeText.enabled = false;
         player2D.canPlay = true;
         ResumeGameTime();
+        GameManager.instance.running = true;
         goText.enabled = true;
         yield return new WaitForSecondsRealtime(1);
         goText.enabled = false;

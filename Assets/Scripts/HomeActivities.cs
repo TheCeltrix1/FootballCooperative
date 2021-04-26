@@ -31,7 +31,7 @@ namespace HomeCode
             _audioSource = GetComponent<AudioSource>();
             _audioSource.playOnAwake = false;
             _audioSource.volume = 0.25f;
-            _altPos = new Vector3(buttonHolder.transform.position.x, -buttonHolder.GetComponentInParent<Canvas>().GetComponent<RectTransform>().rect.height, buttonHolder.transform.position.z);
+            _altPos = new Vector3(buttonHolder.transform.position.x, -buttonHolder.GetComponentInParent<Canvas>().GetComponent<RectTransform>().rect.height/2, buttonHolder.transform.position.z);
             _originalPos = buttonHolder.transform.position;
             buttonHolder.transform.position = _altPos;
             buttonHolder.SetActive(false);
@@ -89,7 +89,6 @@ namespace HomeCode
                 _audioSource.Play();
                 IEnumerator rou = FadInLoading.LoadTransition(audioClips[i].length, obj);
                 StartCoroutine(rou);
-                //walk.movementspeed = 300;
             }
             else Debug.Log($"{i} is out of bounds");
         }

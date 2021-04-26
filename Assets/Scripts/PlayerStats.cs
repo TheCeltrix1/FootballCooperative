@@ -51,11 +51,14 @@ public class PlayerStats : MonoBehaviour
         _totalMaxHealth = GameManager.maxhealth;
         _currentMaxHealth = GameManager.currentMaxHealth;
 
-        staminaSlider.value = GameManager.maxenergy;
-        SetMaxHealth(_totalMaxHealth);
-        SetMaxStamina(_totalMaxStamina);
-        SetCurrentHealth(_currentMaxHealth);
-        SetCurrentStamina(_currentMaxStamina);
+        if (staminaSlider)
+        {
+            staminaSlider.value = GameManager.maxenergy;
+            SetMaxHealth(_totalMaxHealth);
+            SetMaxStamina(_totalMaxStamina);
+            SetCurrentHealth(_currentMaxHealth);
+            SetCurrentStamina(_currentMaxStamina);
+        }
     }
 
     #region Stat Settings

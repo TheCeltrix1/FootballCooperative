@@ -603,6 +603,7 @@ MonoBehaviour:
   trips: 0
   completelvlUI: {fileID: 0}
   tryagain: {fileID: 0}
+  running: 0
   staminaIncrease: 1
   healthIncrease: 0.75
   playerWalking: {fileID: 0}
@@ -6349,7 +6350,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ed0306da28c32494189febf8fc109d41, type: 3}
   buttonHolder: {fileID: 933378659}
   energyIncrease: 0.25
-  timerLength: 2
+  timerLength: 1
   canpush: 0
   walk: {fileID: 926017776}
   clockAnimation: {fileID: 1315536099}
@@ -7186,7 +7187,7 @@ PrefabInstance:
     - target: {fileID: 2730974182505540524, guid: 1906355bc59d21248bb2f41762feea4f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2730974182505540524, guid: 1906355bc59d21248bb2f41762feea4f,
         type: 3}

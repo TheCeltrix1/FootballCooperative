@@ -19,7 +19,7 @@ public class window : MonoBehaviour
         manager = GameManager.instance;
         windowimage = GetComponent<Image>();
         currentstamina = GameManager.currentMaxStamina;
-        Debug.Log(currentstamina);
+        //Debug.Log(currentstamina);
         if (currentstamina >= threshold)
         {
             

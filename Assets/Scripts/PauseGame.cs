@@ -9,7 +9,7 @@ public class PauseGame : MonoBehaviour
 
     public static bool paused = true;
     public bool changePaused = true;
-    private static bool _tutorialPlayed = false;
+    public static bool tutorialPlayed = false;
     public float textCount;
     public TextMeshProUGUI characterText;
     public TextMeshProUGUI characterText2;
@@ -20,7 +20,7 @@ public class PauseGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!_tutorialPlayed)
+        if (!tutorialPlayed)
         {
             characterText.enabled = true;
             characterText2.enabled = false;
@@ -28,7 +28,7 @@ public class PauseGame : MonoBehaviour
             choresText.enabled = false;
             coOpText.enabled = false;
             paused = true;
-            _tutorialPlayed = true;
+            tutorialPlayed = true;
             darkness.SetActive(true);
         }
         else

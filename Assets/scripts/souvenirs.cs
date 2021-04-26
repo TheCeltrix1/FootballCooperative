@@ -18,12 +18,7 @@ public class souvenirs : MonoBehaviour
         if (threshold <= manager.trips)
         {
             this.spirte.enabled = true;
-            Debug.Log("ta");
+            //Debug.Log("ta");
         }
     }
-    void check()
-    {
-   
-    }
-
 }

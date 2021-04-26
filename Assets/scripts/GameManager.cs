@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public float trips;
     public GameObject completelvlUI; // Is this used?
     public GameObject tryagain; // Is this used?
-    public static bool running = false;
+    public bool running = false;
 
     public float staminaIncrease = 1;
     public float healthIncrease = .75f;
@@ -28,7 +28,10 @@ public class GameManager : MonoBehaviour
     public static float health;
     public static float maxhealth = 10;
     public static float currentMaxHealth = 5;
-    
+
+    //Reset Vars
+    private static float _staminaReset = 5;
+    private static float _healthReset = 5;
     #endregion
 
     private void Awake()
@@ -45,10 +48,13 @@ public class GameManager : MonoBehaviour
 
     private void Test(Scene scene, LoadSceneMode mode)
     {
+        if(SceneManager.GetActiveScene().buildIndex == 0)Destroy(instance.gameObject);
+        Cursor.visible = true;
         if (FindObjectOfType<player2D>())
         {
             playerScript = FindObjectOfType<player2D>();
-            running = true;
+            if(PauseGameCoOp.tutorialPlayed) running = true;
+            Cursor.visible = false;
         }
         else if (FindObjectOfType<Player_walking>())
         {
@@ -64,7 +70,7 @@ public class GameManager : MonoBehaviour
         if (FindObjectOfType<PlayerStats>())
         {
             _playerSliderStats = FindObjectOfType<PlayerStats>();
-            if (running) _playerSliderStats.progressBarMax = playerScript.endPos - playerScript.transform.position.x;
+            if (running || (!PauseGameCoOp.tutorialPlayed && FindObjectOfType<player2D>())) _playerSliderStats.progressBarMax = playerScript.endPos - playerScript.transform.position.x;
         }
         stamina = currentMaxStamina;
         health = currentMaxHealth;
@@ -81,17 +87,15 @@ public class GameManager : MonoBehaviour
             _playerSliderStats.SetCurrentStamina(stamina);
             _playerSliderStats.progressBar = playerScript.gameObject.transform.position.x - playerScript.startPos;
         }
-        else
+        else if (FindObjectOfType<Player_walking>())
         {
             stamina = currentMaxStamina;
             health = currentMaxHealth;
-         //   Debug.Log("fell");
         }
     }
 
     public void death(float deathDelay)
     {
-        //Debug.Log("death");
         if (gameover == false)
         {
              // gameover = true;
@@ -100,6 +104,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #region MiscFunctions
     public void ReturnHome()
     {
         currentMaxStamina += staminaIncrease;
@@ -127,6 +132,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
         CancelInvoke("mainmenu");
     }
+
     void ending()
     {
         SceneManager.LoadScene(3);
@@ -137,7 +143,6 @@ public class GameManager : MonoBehaviour
     //I don't know what these do or if they are even used.
     public void endgame(float time)
     {
-        //   completelvlUI.SetActive(true);
         Invoke("ending", time);
     }
 
@@ -145,4 +150,13 @@ public class GameManager : MonoBehaviour
     {
         completelvlUI.SetActive(true);
     }
+
+    public static void ResetManager()
+    {
+        PauseGame.tutorialPlayed = false;
+        PauseGameCoOp.tutorialPlayed = false;
+        currentMaxStamina = _staminaReset;
+        currentMaxHealth = _healthReset;
+    }
+    #endregion
 }

@@ -14,7 +14,7 @@ public class player2D : MonoBehaviour
     public static bool canPlay = false;
 
     [Header("Goal Effects")]
-   //cheer and particle effect
+    //cheer and particle effect
     public float cheerdelay;
     public ParticleSystem goaleffect;
 
@@ -54,7 +54,7 @@ public class player2D : MonoBehaviour
     public float animationDelayTimeMultiplyer = 3;
     public Animator goalieAnimator;
     private bool _endAnimationRandomBool = false;
-    private float _playerSlowdownTime = 0.5f;
+    private float _playerSlowdownTime = 1.5f;
     private float _playerSlowdownTimer;
     private float _animationDelaytime;
     private Animator _playerAnimator;
@@ -103,95 +103,94 @@ public class player2D : MonoBehaviour
 
     void Update()
     {
-       // if (canPlay)
-       // {
-            #region Stamina Management
-            if (stamina <= 0 && _currentMaxStamina < _totalMaxStamina && !_endAnimation)
+        #region Stamina Management
+        if (stamina <= 0 && _currentMaxStamina < _totalMaxStamina && !_endAnimation)
+        {
+            if (_playerCollider.IsTouchingLayers(JumpLayer))
             {
-                if (_playerCollider.IsTouchingLayers(JumpLayer))
+                float loadTime;
+                _endAnimation = true;
+                deepBreathsSFX.Play();
+                _endAnimationRandomBool = (Random.Range(0, 2) == 1);
+                _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
+                _playerAnimator.SetBool("noStamina", true);
+                _playerAnimator.SetBool("maxStamina", false);
+                StartCoroutine(StopMoving(0.5f));
+                if (_endAnimationRandomBool)
                 {
-                    float loadTime;
-                    _endAnimation = true;
-                    deepBreathsSFX.Play();
-                    _endAnimationRandomBool = (Random.Range(0, 2) == 1);
-                    _playerAnimator.SetBool("randomEndAnimation", _endAnimationRandomBool);
-                    _playerAnimator.SetBool("noStamina", true);
-                    _playerAnimator.SetBool("maxStamina", false);
-                    if (_endAnimationRandomBool)
-                    {
-                        _animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
-                        if (!deepBreathsSFX.isPlaying) deepBreathsSFX.Play();
-                        deepBreathsSFX.loop = true;
-                        loadTime = 3;
-                    }
-                    else
-                    {
-                        _animationDelaytime = AnimatorNextClipLength(hitInFaceAnimationName);
-                        if (!faceHitSFX.isPlaying) faceHitSFX.Play();
-                        faceBallHit.GetComponent<BallHitPlayer>().playerFacePosition = transform;
-                        faceBallHit.GetComponent<BallHitPlayer>().StartCoroutine("HitPlayerInTheFace");
-                        loadTime = 0.5f;
-                    }
-                    GameManager.instance.ReturnHome();
-                    FindObjectOfType<FadInLoading>().SceneToLoad(1);
-                    FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(loadTime, 1));
-                    canPlay = false;
+                    _animationDelaytime = AnimatorNextClipLength(breathingAnimationName);
+                    if (!deepBreathsSFX.isPlaying) deepBreathsSFX.Play();
+                    deepBreathsSFX.loop = true;
+                    loadTime = 3;
                 }
-                return;
-            }
-            else if (stamina <= 0 && _currentMaxStamina >= _totalMaxStamina && !_endAnimation)
-            {
-                if (_playerCollider.IsTouchingLayers(JumpLayer))
+                else
                 {
-                    _endAnimation = true;
-                    finalKickSFX.Play();
-                    _playerAnimator.SetBool("noStamina", true);
-                    _playerAnimator.SetBool("maxStamina", true);
-                    _animationDelaytime = AnimatorNextClipLength(kickAnimationName);
-                    goalieAnimator.SetTrigger("Jump");
-
-                    ballMove = false;
-                    cheerSFX.PlayDelayed(cheerdelay);
-                    //   Instantiate(goaleffect, currentBallPosition.gameObject.transform);
-                    plav();
-                    GameManager.instance.endgame(5f);
-                    Debug.Log("endgame");
-                    canPlay = false;
+                    _animationDelaytime = AnimatorNextClipLength(hitInFaceAnimationName);
+                    if (!faceHitSFX.isPlaying) faceHitSFX.Play();
+                    faceBallHit.GetComponent<BallHitPlayer>().playerFacePosition = transform;
+                    faceBallHit.GetComponent<BallHitPlayer>().StartCoroutine("HitPlayerInTheFace");
+                    loadTime = 0.5f;
                 }
-                return;
+                GameManager.instance.ReturnHome();
+                FindObjectOfType<FadInLoading>().SceneToLoad(1);
+                FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(loadTime, 1));
+                canPlay = false;
             }
-            #endregion
-            if (stamina <= 0) runningSFX.Stop();
-
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-
-            #region GameEnd
-            if (!_endAnimation)
+            return;
+        }
+        else if (stamina <= 0 && _currentMaxStamina >= _totalMaxStamina && !_endAnimation)
+        {
+            if (_playerCollider.IsTouchingLayers(JumpLayer))
             {
-                _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
-            }
-            else
-            {
-                backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
-                StartCoroutine("StopMoving");
-            }
-            #endregion
+                StartCoroutine(StopMoving(0.5f));
+                _endAnimation = true;
+                /*finalKickSFX.Play();
+                _playerAnimator.SetBool("noStamina", true);
+                _playerAnimator.SetBool("maxStamina", true);
+                _animationDelaytime = AnimatorNextClipLength(kickAnimationName);
+                goalieAnimator.SetTrigger("Jump");
 
-            //Animation
-            _playerAnimator.SetFloat("speed", speed);
-            _playerAnimator.SetBool("isGrounded", _playerCollider.IsTouchingLayers(JumpLayer));
-
-            #region Movement
-            if (Input.GetMouseButtonDown(0) && !_endAnimation && canPlay)
-            {
-                Jump();
-                jumping = true;
+                ballMove = false;
+                cheerSFX.PlayDelayed(cheerdelay);
+                //   Instantiate(goaleffect, currentBallPosition.gameObject.transform);
+                plav();
+                GameManager.instance.endgame(5f);*/
+                Debug.Log("endgame");
+                canPlay = false;
             }
-            else jumping = false;
-            #endregion
-            backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
-      //  }
-       // else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX, _backgroundPlayerY);
+            return;
+        }
+        #endregion
+        if (stamina <= 0) runningSFX.Stop();
+
+        transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        #region GameEnd
+        if (!_endAnimation)
+        {
+            _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
+        }
+        else
+        {
+            backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
+        }
+        #endregion
+
+        //Animation
+        _playerAnimator.SetFloat("speed", speed);
+        _playerAnimator.SetBool("isGrounded", _playerCollider.IsTouchingLayers(JumpLayer));
+
+        #region Movement
+        if (Input.GetMouseButtonDown(0) && !_endAnimation && canPlay)
+        {
+            Jump();
+            jumping = true;
+        }
+        else jumping = false;
+        #endregion
+        
+        if (canPlay) backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
+        else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX, _backgroundPlayerY);
 
         #region Kick to background
         if (ballMove)
@@ -239,12 +238,33 @@ public class player2D : MonoBehaviour
     #endregion
 
     #region Coroutines
-    private IEnumerator StopMoving()
+    private IEnumerator StopMoving(float stopTime = 1f)
     {
-        _playerRigidbody.velocity = new Vector2(Mathf.Lerp(speed, 0, 1 - (_playerSlowdownTimer / _playerSlowdownTime)), _playerRigidbody.velocity.y);
-        _playerSlowdownTimer -= Time.deltaTime;
-        if (_playerRigidbody.velocity.magnitude == 0) StopCoroutine("StopMoving");
-        yield return null;
+        _playerSlowdownTimer = stopTime;
+        while (true)
+        {
+            _playerRigidbody.velocity = new Vector2(Mathf.Lerp(speed, 0, 1 - (_playerSlowdownTimer / stopTime)), _playerRigidbody.velocity.y);
+            _playerSlowdownTimer -= Time.deltaTime;
+            if (_playerRigidbody.velocity.magnitude == 0)
+            {
+                if (_endAnimation)
+                {
+                    finalKickSFX.Play();
+                    _playerAnimator.SetBool("noStamina", true);
+                    _playerAnimator.SetBool("maxStamina", true);
+                    _animationDelaytime = AnimatorNextClipLength(kickAnimationName);
+                    goalieAnimator.SetTrigger("Jump");
+
+                    ballMove = false;
+                    cheerSFX.PlayDelayed(cheerdelay);
+                    //   Instantiate(goaleffect, currentBallPosition.gameObject.transform);
+                    plav();
+                    GameManager.instance.endgame(2f);
+                }
+                StopCoroutine("StopMoving");
+            }
+            yield return null;
+        }
     }
 
     private IEnumerator PassBall()
@@ -278,13 +298,14 @@ public class player2D : MonoBehaviour
     {
         if (collision.collider.tag == "block")
         {
-            canPlay = false;
-            GameManager.running = false;
             _backgroundPlayerFinalX = backgroundPlayer.transform.position.x;
-            runningSFX.Stop();
             backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
+            StartCoroutine(StopMoving(2));
+            canPlay = false;
+            GameManager.instance.running = false;
             _playerAnimator.SetBool("death", true);
             facePlantSFX.Play();
+            runningSFX.Stop();
             _animationDelaytime = AnimatorNextClipLength(fallAnimationName);
             FindObjectOfType<FadInLoading>().SceneToLoad(2);
             FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(2, 2));
