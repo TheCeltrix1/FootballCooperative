@@ -15,6 +15,7 @@ public class PauseGameCoOp : MonoBehaviour
     public TextMeshProUGUI howToPlayText;
     public TextMeshProUGUI StaminaText;
 
+
     [Header("Countdown")]
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI readyText;
@@ -26,6 +27,7 @@ public class PauseGameCoOp : MonoBehaviour
     {
         if (!_tutorialPlayed)
         {
+          
             howToPlayText.enabled = true;
             ObsticalsText.enabled = false;
             StaminaText.enabled = false;
@@ -38,6 +40,7 @@ public class PauseGameCoOp : MonoBehaviour
         }
         else
         {
+       
             paused = false;
             ObsticalsText.enabled = false;
             howToPlayText.enabled = false;
@@ -45,6 +48,7 @@ public class PauseGameCoOp : MonoBehaviour
             timeText.enabled = false;
             goText.enabled = false;
             readyText.enabled = false;
+            player2D.canPlay = true;
         }
 
         
@@ -112,6 +116,7 @@ public class PauseGameCoOp : MonoBehaviour
 
             timeRemaining--;
         }
+   
         readyText.enabled = false;
         timeText.enabled = false;
         player2D.canPlay = true;
