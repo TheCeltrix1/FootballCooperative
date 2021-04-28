@@ -195,10 +195,7 @@ public class player2D : MonoBehaviour
         else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX, _backgroundPlayerY);
 
         #region Kick to background
-        if (ballMove)
-        {
-            StartCoroutine("PassBall");
-        }
+        if (ballMove) StartCoroutine("PassBall");
         else currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
         #endregion
 
@@ -218,6 +215,7 @@ public class player2D : MonoBehaviour
             return;
         }
         Vector2 jumpVelocityToAdd = new Vector2(0f, jump);
+        //Shadow Shrinkage.
         if (!jumpSFX.isPlaying) jumpSFX.Play();
         if (!kickSFX.isPlaying) kickSFX.Play();
         if (!runningSFX.isPlaying) runningSFX.Play();
@@ -300,6 +298,7 @@ public class player2D : MonoBehaviour
     {
         if (collision.collider.tag == "block")
         {
+            _endAnimation = true;
             canPlay = false;
             _backgroundPlayerFinalX = backgroundPlayer.transform.position.x;
             backgroundPlayer.GetComponent<Animator>().SetBool("end", true);
