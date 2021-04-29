@@ -5488,10 +5488,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1272235284}
     m_Modifications:
+    - target: {fileID: 4351347510282838100, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e6c08194d7984584cb0686c4b36ea17a,
+        type: 3}
     - target: {fileID: 4351347510282838187, guid: da1c4f7949b2ede4ea230600ec7d8b42,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -430
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 4351347511483315665, guid: da1c4f7949b2ede4ea230600ec7d8b42,
         type: 3}
@@ -5603,6 +5609,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914561, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 460
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914561, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914561, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914561, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
         type: 3}
       propertyPath: m_RaycastTarget
@@ -5612,6 +5638,42 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Maskable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 18ca11b79e38fb349bfe28c880a14ee9,
+        type: 3}
+    - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_Text
+      value: Press the Left Mouse Button to Continue.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da1c4f7949b2ede4ea230600ec7d8b42, type: 3}
@@ -8337,8 +8399,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 430, y: 0}
-  m_SizeDelta: {x: 1052.6572, y: 113.522095}
+  m_AnchoredPosition: {x: 460, y: 50}
+  m_SizeDelta: {x: 650, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1160363089
 MonoBehaviour:
@@ -8354,8 +8416,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_Maskable: 0
+  m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8365,16 +8427,19 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 60
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "The Wellness wheel\nshows the key aspects\nin a happy life.\n\nTo enjoy
-    fulfilled and \nhappy lives, it is \nimportant to take\ncare of your well-being\nand
-    to invest time \nin yourself."
+  m_Text: 'The Wellness wheel shows the key aspects in a happy life.
+
+
+    To enjoy
+    fulfilled and happy lives, it is important to take care of your well-being and
+    to invest time in yourself.'
 --- !u!222 &1160363090
 CanvasRenderer:
   m_ObjectHideFlags: 0
