@@ -32,6 +32,12 @@ public class player2D : MonoBehaviour
     private bool _kickSFXBool;
 
     public GameObject faceBallHit;
+    public GameObject shadowObj;
+    private Vector3 _shadowPos;
+    private Vector3 _playerPos;
+    private float _shadowPosYCalculated;
+    private SpriteRenderer _playerRenderer;
+    private float _shadowSpriteWidth = 1;
     private float _ballTransitionSpeed = 0.25f;
     private float _ballTransitionStage;
     private float _ballForegroundScale = 2f;
@@ -91,14 +97,20 @@ public class player2D : MonoBehaviour
         endPos = transform.position.x + speed * _totalMaxStamina;
 
         _playerSlowdownTimer = _playerSlowdownTime;
+        _playerRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _playerPos = transform.GetChild(0).transform.position;
         _playerRigidbody = GetComponent<Rigidbody2D>();
         _playerCollider = GetComponent<Collider2D>();
         _playerAnimator = GetComponent<Animator>();
         _playerAnimator.SetBool("noStamina", false);
         _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        _backgroundPlayerY = (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f) + (backgroundBallPosition.y / 2);
+        _backgroundPlayerY = (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.y / 1.5f) + (backgroundBallPosition.y / 1.5f);
         _backgroundPlayerX = backgroundBallPosition.x - (backgroundPlayer.GetComponent<SpriteRenderer>().bounds.size.x / 3);
         _backgroundPlayerFinalX = transform.position.x + _backgroundPlayerX;
+
+        _shadowSpriteWidth = 1;
+        _shadowPos = shadowObj.transform.localPosition;
+        _shadowPosYCalculated = transform.position.y + _shadowPos.y;
     }
 
     void Update()
@@ -190,15 +202,18 @@ public class player2D : MonoBehaviour
         }
         else jumping = false;
         #endregion
-        
+
         if (canPlay) backgroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
         else backgroundPlayer.transform.position = new Vector2(_backgroundPlayerFinalX, _backgroundPlayerY);
+
+        if (!_playerRenderer.sprite.name.Contains("man_sport_fall")) _shadowSpriteWidth = 2;
+        else _shadowSpriteWidth = 5;
+        ScaleShadow((transform.GetChild(0).position.y + 1.5f) - _playerPos.y);
 
         #region Kick to background
         if (ballMove) StartCoroutine("PassBall");
         else currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, _speedScore * Time.deltaTime);
         #endregion
-
     }
 
     void plav()
@@ -221,6 +236,12 @@ public class player2D : MonoBehaviour
         if (!runningSFX.isPlaying) runningSFX.Play();
         _playerRigidbody.velocity += jumpVelocityToAdd;
 
+    }
+
+    void ScaleShadow(float scale)
+    {
+        shadowObj.transform.position = new Vector3(transform.position.x + _shadowPos.x, _shadowPosYCalculated, _shadowPos.z);
+        shadowObj.transform.localScale = new Vector3(_shadowSpriteWidth / scale, shadowObj.transform.localScale.y, 1);
     }
 
     #region Animator Clip Info Finder
@@ -247,7 +268,7 @@ public class player2D : MonoBehaviour
             _playerSlowdownTimer -= Time.deltaTime;
             if (_playerRigidbody.velocity.magnitude == 0)
             {
-                if (_endAnimation && _currentMaxStamina >= _totalMaxStamina)
+                if (_endAnimation && _currentMaxStamina >= _totalMaxStamina && stamina <= 0)
                 {
                     finalKickSFX.Play();
                     _playerAnimator.SetBool("noStamina", true);
@@ -292,6 +313,7 @@ public class player2D : MonoBehaviour
         currentBallPosition.transform.localScale = new Vector3(scale, scale, scale);
         yield return null;
     }
+
     #endregion
 
     void OnCollisionEnter2D(Collision2D collision)
