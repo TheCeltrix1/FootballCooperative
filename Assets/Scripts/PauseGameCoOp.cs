@@ -48,7 +48,7 @@ public class PauseGameCoOp : MonoBehaviour
             timeText.enabled = false;
             goText.enabled = false;
             readyText.enabled = false;
-            player2D.canPlay = true;
+            player2D.k_canPlay = true;
         }
 
         
@@ -119,7 +119,7 @@ public class PauseGameCoOp : MonoBehaviour
    
         readyText.enabled = false;
         timeText.enabled = false;
-        player2D.canPlay = true;
+        player2D.k_canPlay = true;
         ResumeGameTime();
         GameManager.instance.running = true;
         goText.enabled = true;
