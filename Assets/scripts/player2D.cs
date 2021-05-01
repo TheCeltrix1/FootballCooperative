@@ -344,6 +344,7 @@ public class player2D : MonoBehaviour
     public GameObject faceBallHit;
     public GameObject currentBallPosition;
     public GameObject shadowObj;
+    public Transform goal;
 
     private float _loadTime;
     private float _jumpForceValue = 5;
@@ -396,6 +397,7 @@ public class player2D : MonoBehaviour
         _playerRigidbody = GetComponent<Rigidbody2D>();
 
         #region Declaring Variables
+        _randomEndAnimation = (int)Random.Range(0, 2) == 1;
         _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
         _totalMaxStamina = GameManager.maxenergy;
         startPos = transform.position.x;
@@ -452,7 +454,11 @@ public class player2D : MonoBehaviour
         else _shadowSpriteWidth = 5;
         ScaleShadow((transform.GetChild(0).position.y + 1.5f) - _playerPos.y);
         #region Stamina Management
-        if (stamina <= 0) DepleteStamina();
+        if (stamina <= 0)
+        {
+            DepleteStamina();
+            if(GameManager.currentMaxStamina >= GameManager.maxenergy) currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, 80 * Time.deltaTime);
+        }
         #endregion
     }
 
@@ -461,9 +467,6 @@ public class player2D : MonoBehaviour
     {
         if (k_canPlay && _canMove && PauseGameCoOp.tutorialPlayed)
         {
-            _randomEndAnimation = Random.Range(0, 2) == 1;
-            _playerAnimator.SetBool("noStamina", true);
-            //Check If Final Attempt
             if (GameManager.currentMaxStamina >= GameManager.maxenergy) Goal();
             else LoadingScene();
             k_canPlay = false;
@@ -478,7 +481,7 @@ public class player2D : MonoBehaviour
 
     private void Goal()
     {
-        float time = 1f;
+        float time = 0.25f;
         StartCoroutine(StopMoving(time));
         Animations("Goal");
         Animations("BGPlayerDeath");
@@ -524,11 +527,12 @@ public class player2D : MonoBehaviour
 
             case "OutOfStamina":
                 _playerAnimator.SetBool("randomEndAnimation", _randomEndAnimation);
+                _playerAnimator.SetBool("noStamina", true);
                 break;
 
             case "Goal":
-                _playerAnimator.SetBool("noStamina", true);
                 _playerAnimator.SetBool("maxStamina", true);
+                _playerAnimator.SetBool("noStamina", true);
                 goalieAnimator.SetTrigger("Jump");
                 goaleffect.Play();
                 break;
@@ -565,7 +569,6 @@ public class player2D : MonoBehaviour
                 if (!jumpSFX.isPlaying) jumpSFX.Play();
                 kickSFX.Play();
                 runningSFX.Stop();
-                Debug.Log("Jump");
                 break;
 
             case "Land":
@@ -573,7 +576,6 @@ public class player2D : MonoBehaviour
                 landSFX.Play();
                 kickSFX.Play();
                 runningSFX.Play();
-                Debug.Log("Land");
                 break;
 
             case "Goal":
