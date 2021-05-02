@@ -392,12 +392,12 @@ MonoBehaviour:
     sporting activity is less related to attitudes about the benefits of sport than
     to other transitions that occur in their lives.
 
-    
 
-    Repeated studies
-    have consistently shown that males aged over 45 are amongst those least likely
-    to be active. As a result they suffer from worse health, mental and physical,
-    and are more likely to die younger, than the rest of the population.'
+
+    Repeated studies have
+    consistently shown that males aged over 45 are amongst those least likely to
+    be active. As a result they suffer from worse health, mental and physical, and
+    are more likely to die younger, than the rest of the population.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b1897a01214efa749ae10c2e4671d974, type: 2}
   m_sharedMaterial: {fileID: 555485087077499649, guid: b1897a01214efa749ae10c2e4671d974,
@@ -1344,34 +1344,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cathal O''Rourke
-
-
-    Marcus Gleeson
-
-    John Heaphey
-
-    Cathal O''Rourke
-
-
-    Ruairi
-    Pepper
-
-    Brendan Hewson
-
-
-    Marcus Gleeson
-
-
-    Brendan Hewson
-
-
-    John
-    Heaphey
-
-
-
-    Laura Ryder'
+  m_text: "Cathal O'Rourke\n\nMarcus Gleeson\nJohn Heaphey\nCathal O'Rourke\n\nRuair\xED
+    Pepper\nBrendan Hewson\n\nMarcus Gleeson\n\nBrendan Hewson\n\nJohn Heaphey\n\n\nLaura
+    Ryder"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b1897a01214efa749ae10c2e4671d974, type: 2}
   m_sharedMaterial: {fileID: 555485087077499649, guid: b1897a01214efa749ae10c2e4671d974,
