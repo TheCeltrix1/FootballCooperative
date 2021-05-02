@@ -30242,7 +30242,7 @@ PrefabInstance:
     - target: {fileID: 4351347511655914562, guid: da1c4f7949b2ede4ea230600ec7d8b42,
         type: 3}
       propertyPath: m_Text
-      value: 'Press Left Mouse Button To Return Home
+      value: 'Press Left Mouse Button To Continue
 
 '
       objectReference: {fileID: 0}

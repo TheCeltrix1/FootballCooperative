@@ -361,6 +361,7 @@ public class player2D : MonoBehaviour
     private float _backgroundPlayerX;
     private float _shadowSpriteWidth = 1;
     private float _shadowPosYCalculated;
+    private float _maxStaminaAtStartOfRun;
     private Vector3 _shadowPos;
     private Vector2 _targetPosition;
     private Vector3 _playerPos;
@@ -411,6 +412,7 @@ public class player2D : MonoBehaviour
         _bGPlayerAnimator = backGroundPlayer.GetComponent<Animator>();
         _shadowPos = shadowObj.transform.localPosition;
         _shadowPosYCalculated = transform.position.y + _shadowPos.y;
+        _maxStaminaAtStartOfRun = GameManager.currentMaxStamina;
         #endregion
     }
 
@@ -457,7 +459,7 @@ public class player2D : MonoBehaviour
         if (stamina <= 0)
         {
             DepleteStamina();
-            if(GameManager.currentMaxStamina >= GameManager.maxenergy) currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, 80 * Time.deltaTime);
+            if(_maxStaminaAtStartOfRun >= GameManager.maxenergy) currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, 80 * Time.deltaTime);
         }
         #endregion
     }
