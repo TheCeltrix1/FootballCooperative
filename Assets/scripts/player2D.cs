@@ -402,7 +402,7 @@ public class player2D : MonoBehaviour
         _ballYPosition = currentBallPosition.GetComponent<SpriteRenderer>().bounds.size.y / 2;
         _totalMaxStamina = GameManager.maxenergy;
         startPos = transform.position.x;
-        endPos = transform.position.x + speed + (speed * _totalMaxStamina);
+        endPos = transform.position.x + (speed * _totalMaxStamina);
         _playerAnimator = GetComponent<Animator>();
         _playerCollider = GetComponent<Collider2D>();
         _playerPos = transform.GetChild(0).transform.position;
@@ -423,43 +423,47 @@ public class player2D : MonoBehaviour
         {
             _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
 
-            if (_playerCollider.IsTouchingLayers(JumpLayer) && _playerRigidbody.velocity.y == 0 && (endPos - transform.position.x) >= 20 && !_inAir) Jump();
+            if (_playerCollider.IsTouchingLayers(JumpLayer) && _playerRigidbody.velocity.y == 0 && (endPos - transform.position.x) >= 15 && !_inAir) Jump();
             if (_playerCollider.IsTouchingLayers(JumpLayer)) Animations("Land");
             else Animations("Jump");
 
             StartCoroutine(PassBall());
-        }
-        if (_playerCollider.IsTouchingLayers(JumpLayer))
-        {
-            if(_inAir)Land();
-            _playerAnimator.SetBool("isGrounded", true);
-            if (_animationPlayOnHitGround)
+
+            if (_playerCollider.IsTouchingLayers(JumpLayer))
             {
-                StartCoroutine(StopMoving(.5f));
-                Animations("OutOfStamina");
-                SFX("OutOfStamina");
-                GameManager.instance.ReturnHome();
-                FindObjectOfType<FadInLoading>().SceneToLoad(1);
-                FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(_loadTime, 1));
-                _animationPlayOnHitGround = false;
+                if (_inAir) Land();
+                _playerAnimator.SetBool("isGrounded", true);
+                if (_animationPlayOnHitGround)
+                {
+                    StartCoroutine(StopMoving(.5f));
+                    Animations("OutOfStamina");
+                    SFX("OutOfStamina");
+                    GameManager.instance.ReturnHome();
+                    FindObjectOfType<FadInLoading>().SceneToLoad(1);
+                    FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(_loadTime, 1));
+                    _animationPlayOnHitGround = false;
+                }
+                _inAir = false;
             }
-            _inAir = false;
+            else
+            {
+                _playerAnimator.SetBool("isGrounded", false);
+                _inAir = true;
+            }
+            if (!_bGPlayerAnimator.GetBool("end")) backGroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
+            #endregion
+            if (!_playerRenderer.sprite.name.Contains("man_sport_fall")) _shadowSpriteWidth = 2;
+            else _shadowSpriteWidth = 5;
+            ScaleShadow((transform.GetChild(0).position.y + 1.5f) - _playerPos.y);
         }
-        else
-        {
-            _playerAnimator.SetBool("isGrounded", false);
-            _inAir = true;
-        }
-        if (!_bGPlayerAnimator.GetBool("end")) backGroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
-        #endregion
-        if (!_playerRenderer.sprite.name.Contains("man_sport_fall")) _shadowSpriteWidth = 2;
-        else _shadowSpriteWidth = 5;
-        ScaleShadow((transform.GetChild(0).position.y + 1.5f) - _playerPos.y);
         #region Stamina Management
         if (stamina <= 0)
         {
+            if (_maxStaminaAtStartOfRun >= GameManager.maxenergy)
+            {
+                currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, 80 * Time.deltaTime);
+            }
             DepleteStamina();
-            if(_maxStaminaAtStartOfRun >= GameManager.maxenergy) currentBallPosition.transform.position = Vector2.MoveTowards(currentBallPosition.transform.position, goal.position, 80 * Time.deltaTime);
         }
         #endregion
     }
@@ -483,7 +487,7 @@ public class player2D : MonoBehaviour
 
     private void Goal()
     {
-        float time = 0.25f;
+        float time = 0.01f;
         StartCoroutine(StopMoving(time));
         Animations("Goal");
         Animations("BGPlayerDeath");
@@ -537,6 +541,7 @@ public class player2D : MonoBehaviour
                 _playerAnimator.SetBool("noStamina", true);
                 goalieAnimator.SetTrigger("Jump");
                 goaleffect.Play();
+                Debug.Log("AWAWOIWAOI");
                 break;
         }
     }
