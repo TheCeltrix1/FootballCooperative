@@ -541,7 +541,6 @@ public class player2D : MonoBehaviour
                 _playerAnimator.SetBool("noStamina", true);
                 goalieAnimator.SetTrigger("Jump");
                 goaleffect.Play();
-                Debug.Log("AWAWOIWAOI");
                 break;
         }
     }
