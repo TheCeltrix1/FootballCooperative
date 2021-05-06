@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     #region Stat Variables
     public static float stamina;
     public static float maxenergy = 9.5f;
-    public static float currentMaxStamina = 9.5f;
+    public static float currentMaxStamina = 4.75f;
 
     public static float health;
     public static float maxhealth = 10;
