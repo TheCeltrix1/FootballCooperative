@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: FootBall Cooperative
+  companyName: FootBall Cooperative
+  productName: 'Life''s Goal: Ben Strikes Back'
   defaultCursor: {fileID: 2800000, guid: 01156abd21a8adb4284ffce7924cfb41, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
