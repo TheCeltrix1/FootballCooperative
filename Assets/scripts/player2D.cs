@@ -423,39 +423,38 @@ public class player2D : MonoBehaviour
         {
             _playerRigidbody.velocity = new Vector2(speed, _playerRigidbody.velocity.y);
 
-            if (_playerCollider.IsTouchingLayers(JumpLayer) && _playerRigidbody.velocity.y == 0 && (endPos - transform.position.x) >= 15 && !_inAir) Jump();
+            if (_playerCollider.IsTouchingLayers(JumpLayer) && _playerRigidbody.velocity.y == 0 && (endPos - transform.position.x) >= 10 && !_inAir) Jump();
             if (_playerCollider.IsTouchingLayers(JumpLayer)) Animations("Land");
             else Animations("Jump");
 
             StartCoroutine(PassBall());
-
-            if (_playerCollider.IsTouchingLayers(JumpLayer))
-            {
-                if (_inAir) Land();
-                _playerAnimator.SetBool("isGrounded", true);
-                if (_animationPlayOnHitGround)
-                {
-                    StartCoroutine(StopMoving(.5f));
-                    Animations("OutOfStamina");
-                    SFX("OutOfStamina");
-                    GameManager.instance.ReturnHome();
-                    FindObjectOfType<FadInLoading>().SceneToLoad(1);
-                    FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(_loadTime, 1));
-                    _animationPlayOnHitGround = false;
-                }
-                _inAir = false;
-            }
-            else
-            {
-                _playerAnimator.SetBool("isGrounded", false);
-                _inAir = true;
-            }
-            if (!_bGPlayerAnimator.GetBool("end")) backGroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
-            #endregion
-            if (!_playerRenderer.sprite.name.Contains("man_sport_fall")) _shadowSpriteWidth = 2;
-            else _shadowSpriteWidth = 5;
-            ScaleShadow((transform.GetChild(0).position.y + 1.5f) - _playerPos.y);
         }
+        if (_playerCollider.IsTouchingLayers(JumpLayer))
+        {
+            if (_inAir) Land();
+            _playerAnimator.SetBool("isGrounded", true);
+            if (_animationPlayOnHitGround)
+            {
+                StartCoroutine(StopMoving(.5f));
+                Animations("OutOfStamina");
+                SFX("OutOfStamina");
+                GameManager.instance.ReturnHome();
+                FindObjectOfType<FadInLoading>().SceneToLoad(1);
+                FindObjectOfType<FadInLoading>().StartCoroutine(FindObjectOfType<FadInLoading>().LoadingScreem(_loadTime, 1));
+                _animationPlayOnHitGround = false;
+            }
+            _inAir = false;
+        }
+        else
+        {
+            _playerAnimator.SetBool("isGrounded", false);
+            _inAir = true;
+        }
+        if (!_bGPlayerAnimator.GetBool("end")) backGroundPlayer.transform.position = new Vector2(transform.position.x + _backgroundPlayerX, _backgroundPlayerY);
+        #endregion
+        if (!_playerRenderer.sprite.name.Contains("man_sport_fall")) _shadowSpriteWidth = 2;
+        else _shadowSpriteWidth = 5;
+        ScaleShadow((transform.GetChild(0).position.y + 1.5f) - _playerPos.y);
         #region Stamina Management
         if (stamina <= 0)
         {
